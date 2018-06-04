@@ -1,6 +1,15 @@
 
 # DOES NOT APPLY does not work untill it is switched to option 0
 # This will be the quetions that will be asked
+
+# function for some yes no problems
+# This function takes the Yes/No options and correctly outputs the numerical that is assoated with the excel sheet
+def Maths(num):
+    num -= 1
+    if (num == 3):
+        num = 0
+    return num
+
 Runt = 0
 Total = 0
 Xvalue = 0
@@ -10,7 +19,6 @@ System_name = input('Enter System Name: ')
 System_status = int(input('Please Chose the coresponding number for your system status.'
                       '1. Pre-Milestone , '
                       '2. LIRP: '))
-Runt += System_status
 
 Authorizing_official = input('Please enter Authorizing Official: ')
 
@@ -25,7 +33,7 @@ Data_classification = int(input('Please Select Data Classification: '
                             '1. U , '
                             '2. S , '
                             '3. TS: '))
-Runt += Data_classification
+
 
 Connectivity = int(input('Please Select connectivity to the internet: '
                      '1. Open Network - Commercial ISP , '
@@ -38,6 +46,8 @@ Connectivity = int(input('Please Select connectivity to the internet: '
                      '8. Standalone Network , '
                      '9. Standalone System - With Media , '
                      '10. Standalone System - No Media: '))
+# This Line Flips the number to the correct out put. AKA 1 will = 9 to collate with the Excel sheet scoring table.
+Connectivity = 10 - Connectivity
 Runt += Connectivity
 
 System_fielded = int(input('Please select how many systems are fielded: '
@@ -50,12 +60,12 @@ Runt += System_fielded
 
 Email = int(input('Are users able to email?: '
               '1. Yes , '
-              '2. No: '))
+              '0. No: '))
 Runt += Email
 
 Web = int(input('Are users able to use a web browser?: '
             '1. Yes , '
-            '2. No: '))
+            '0. No: '))
 Runt += Web
 
 Admin_privileges = int(input('What kind of users are logged on as?: '
@@ -63,30 +73,41 @@ Admin_privileges = int(input('What kind of users are logged on as?: '
                          '2. Admin - Partial privileges , '
                          '3. Admin - Elevated privileges , '
                          '4. Does not Apply: '))
+
+# Fixes the numbering issue so 1 = 0, 2 = 1 , 3 = 2, and 4 = 0;
+Admin_privileges -= 1
+if(Admin_privileges == 3):
+    Admin_privileges = 0
+print(Admin_privileges)
+
 Runt += Admin_privileges
 
 TFA = int(input('Does the system have PIK or TFA?: '
             '1. Yes , '
             '2. No , '
-            '0. Does not Apply: '))
+            '3. Does not Apply: '))
+TFA = Maths(TFA)
 Runt += TFA
 
 App_whitelist = int(input('Use a App whitelisting capability?: '
                       '1. Yes , '
                       '2. No , '
-                      '0. Does not Apply: '))
+                      '3. Does not Apply: '))
+App_whitelist = Maths(App_whitelist)
 Runt += App_whitelist
 
 Host_protection = int(input('Uses Host Based Protection?: '
                         '1. Yes , '
-                        '2. No , '
-                        '0. Does Not Apply: '))
+                        '2. No , '))
+
+Host_protection = Maths(Host_protection)
 Runt += Host_protection
 
 Hard_ports = int(input('Are the unused ports (Ethernet/USB) disabled on the system?: '
                    '1. Yes , '
-                   '2. No , '
-                   '0. Does Not Apply: '))
+                   '2. No: '))
+
+Hard_ports = Maths(Hard_ports)
 Runt += Hard_ports
 
 STIGs = int(input('Have any STIGs been run on the system?: '
@@ -99,6 +120,7 @@ Encryption = int(input('Is ecnryption at rest?: '
                    '1. Yes , '
                    '2. No , '
                    '0. Does Not Apply: '))
+Encryption = Maths(Encryption)
 Runt += Encryption
 
 Owner = input('System Owner Approval Justification Discussion: ')
@@ -122,29 +144,33 @@ print('Additional Testing: Please leave this section blank')
 Testing = int(input('Has any Testing been compleated?: '
                 '1. Yes - Vulnerability , 2. Yes - Penetration , 3. Yes - Adversary , 4. No: '))
 
-
-
-
+# Make a negative number out of the Choice selected
+if Testing == 4:
+    Testing = 0
+else:
+    Testing = Testing * -5
 Runt += Testing
 
 SMI = int(input('Were security measures implemented?: '
             '1. Yes , 2. No , 0. Does Not Apply: '))
 Runt += SMI
 
-ExSMI = input('If yes to the prevous question please enter a discription: ')
+ExSMI = input('If yes to the previous question please enter a description: ')
 
 Funding = int(input('Is Funding Available: '
                 '1. Yes , 2. No , 0. Does Not Apply: '))
+Funding -= 1
+if (Funding == 1) or (Funding == 0):
+    When_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format)')
 Runt += Funding
 
-When_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format)')
 
 Answer = 0
-Answer = Runt * 5
+Answer = Runt * 5 #Function 1
 print('This is the Total Score: ' + str(Answer))
-print('This is the Colum Number: ' + str(Xvalue))
+print('This is the Colum Number: ' + str(Xvalue)) #Function 2
 
-
+# Function 3 Bellow
 
 
 # def Al(Runt):
