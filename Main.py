@@ -18,7 +18,6 @@ Service_branch = int(input('Please Select Branch: '
                        '1. Army , '
                        '2. Navy , '
                        '3. Air Force: '))
-Runt += Service_branch
 
 Rationale_for_waiver = input('Im lazy')
 
@@ -122,6 +121,10 @@ print('Additional Testing: Please leave this section blank')
 
 Testing = int(input('Has any Testing been compleated?: '
                 '1. Yes - Vulnerability , 2. Yes - Penetration , 3. Yes - Adversary , 4. No: '))
+
+
+
+
 Runt += Testing
 
 SMI = int(input('Were security measures implemented?: '
