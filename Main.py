@@ -82,5 +82,4 @@ SMI = input('Were security measures implemented?: '
 ExSMI = input('If yes to the prevous question please enter a discription: ')
 Funding = input('Is Funding Available: '
                 '1. Yes , 2. No , 3. Does Not Apply: ')
-When_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format): ')
-
+When_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format): '#
