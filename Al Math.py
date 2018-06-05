@@ -38,3 +38,53 @@ if Data_classification == 3:
 
 arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
 print(arr)
+
+
+
+
+
+
+###########
+
+
+
+
+Likely_hood = int(input('What would you like your risk score to be?: '))
+Impact = int(input('What would you like your Impact to be?: '))
+
+def scorefunction(num, num2):
+
+    arrl = [0, 10]
+    arri = [0, 1]
+
+    arrl[0] = num
+    arri[0] = num2
+
+    for x in range(0,2):
+        if arrl[x] <= 10:
+            arrl[x] = 'Very Low'
+        if arrl[x] in range(11, 42):
+            arrl[x] = 'Low'
+        if arrl[x] in range(40, 61):
+            arrl[x] = 'Moderate'
+        if arrl[x] in range(60, 91):
+            arrl[x] = 'High'
+        if arrl[x] in range(91, 120):
+            arrl[x] = 'Very High'
+
+    for x in range(0,2):
+        if arri[x] == 4:
+            arri[x] = 'Very Low'
+        if arri[x] == 3:
+            arri[x] = 'Low'
+        if arri[x] == 2:
+            arri[x] = 'Moderate'
+        if arri[x] == 1:
+            arri[x] = 'High'
+        if arri[x] == 0:
+            arrl[x] = 'Very High'
+
+    print(arrl)
+    print(arri)
+
+scorefunction(Likely_hood,Impact)
