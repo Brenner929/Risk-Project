@@ -1,0 +1,170 @@
+def Maths(num):
+    num -= 1
+    if (num == 3):
+        num = 0
+    return num
+
+def LikelyHood(num):
+
+    dad = num * 5
+    return dad
+
+def Main():
+    Runt = 0
+    Total = 0
+    Xvalue = 0
+
+    System_name = 'Enter System Name: '
+
+    System_status = input('Please Chose the coresponding number for your system status.'
+                          '1. Pre-Milestone , '
+                          '2. LIRP: ')
+
+    Authorizing_official = input('Please enter Authorizing Official: ')
+
+    Service_branch = input('Please Select Branch: '
+                           '1. Army , '
+                           '2. Navy , '
+                           '3. Air Force: ')
+
+    Rationale_for_waiver = input('Im lazy')
+
+    Data_classification = input('Please Select Data Classification: '
+                                '1. U , '
+                                '2. S , '
+                                '3. TS: ')
+
+    Connectivity = int(input('Please Select connectivity to the internet: '
+                             '1. Open Network - Commercial ISP , '
+                             '2. Open Network - .edu , '
+                             '3. Open Network - NIPR , '
+                             '4. Closed Restricted Network - SIPRNET , '
+                             '5. Closed Restricted Network - JWICS , '
+                             '6. Closed Restricted Network - SAP/SAR , '
+                             '7. Closed Restricted Network - Other , '
+                             '8. Standalone Network , '
+                             '9. Standalone System - With Media , '
+                             '10. Standalone System - No Media: '))
+    # This Line Flips the number to the correct out put. AKA 1 will = 9 to collate with the Excel sheet scoring table.
+    Connectivity = 10 - Connectivity
+    Runt += Connectivity
+
+    System_fielded = int(input('Please select how many systems are fielded: '
+                               '1. 1-10 , '
+                               '2. 11-50 , '
+                               '3. 51-100 , '
+                               '4. 101-500 , '
+                               '5. 501+: '))
+    Runt += System_fielded
+
+    Email = int(input('Are users able to email?: '
+                      '1. Yes , '
+                      '0. No: '))
+    Runt += Email
+
+    Web = int(input('Are users able to use a web browser?: '
+                    '1. Yes , '
+                    '0. No: '))
+    Runt += Web
+
+    Admin_privileges = int(input('What kind of users are logged on as?: '
+                                 '1. User , '
+                                 '2. Admin - Partial privileges , '
+                                 '3. Admin - Elevated privileges , '
+                                 '4. Does not Apply: '))
+
+    # Fixes the numbering issue so 1 = 0, 2 = 1 , 3 = 2, and 4 = 0;
+    Admin_privileges -= 1
+    if (Admin_privileges == 3):
+        Admin_privileges = 0
+    print(Admin_privileges)
+
+    Runt += Admin_privileges
+
+    TFA = int(input('Does the system have PIK or TFA?: '
+                    '1. Yes , '
+                    '2. No , '
+                    '3. Does not Apply: '))
+    TFA = Maths(TFA)
+    Runt += TFA
+
+    App_whitelist = int(input('Use a App whitelisting capability?: '
+                              '1. Yes , '
+                              '2. No , '
+                              '3. Does not Apply: '))
+    App_whitelist = Maths(App_whitelist)
+    Runt += App_whitelist
+
+    Host_protection = int(input('Uses Host Based Protection?: '
+                                '1. Yes , '
+                                '2. No , '))
+
+    Host_protection = Maths(Host_protection)
+    Runt += Host_protection
+
+    Hard_ports = int(input('Are the unused ports (Ethernet/USB) disabled on the system?: '
+                           '1. Yes , '
+                           '2. No: '))
+
+    Hard_ports = Maths(Hard_ports)
+    Runt += Hard_ports
+
+    STIGs = int(input('Have any STIGs been run on the system?: '
+                      '1. Yes , '
+                      '2. No , '
+                      '0. Does Not Apply: '))
+    Runt += STIGs
+
+    Encryption = int(input('Is ecnryption at rest?: '
+                           '1. Yes , '
+                           '2. No , '
+                           '0. Does Not Apply: '))
+    Encryption = Maths(Encryption)
+    Runt += Encryption
+
+    Owner = input('System Owner Approval Justification Discussion: ')
+
+    System_ato_date = input('Please enter System ATO Date in MM/DD/YYYY Format: ')
+
+    Anticipated_ato_date = input("Please Enter Anticipated ATO Date in MM/DD/YYYY Format: ")
+
+    MIC = int(input('Please Enter Mission Impact if Compromised: '
+                    '4. Very High , 3. High , 2. Moderate , 1. Low , 0. Very Low: '))
+    Xvalue = MIC
+
+    ISC = int(input('Please Enter Impact to the System if Compromised: '
+                    '4. Very High , 3. High , 2. Moderate , 1. Low , 0. Very Low: '))
+
+    if Xvalue <= ISC:
+        Xvalue = ISC
+
+    print('Additional Testing: Please leave this section blank')
+
+    Testing = int(input('Has any Testing been compleated?: '
+                        '1. Yes - Vulnerability , 2. Yes - Penetration , 3. Yes - Adversary , 4. No: '))
+
+    # Make a negative number out of the Choice selected
+    if Testing == 4:
+        Testing = 0
+    else:
+        Testing = Testing * -5
+    Runt += Testing
+
+    SMI = int(input('Were security measures implemented?: '
+                    '1. Yes , 2. No , 0. Does Not Apply: '))
+    Runt += SMI
+
+    ExSMI = input('If yes to the previous question please enter a description: ')
+
+    Funding = int(input('Is Funding Available: '
+                        '1. Yes , 2. No , 0. Does Not Apply: '))
+    Funding -= 1
+    if (Funding == 1) or (Funding == 0):
+        When_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format)')
+    Runt += Funding
+
+    Answer = LikelyHood(Runt)
+    print('This is the Total Score: ' + str(Answer))
+    print('This is the Colum Number: ' + str(Xvalue))  # Function 2
+
+

@@ -172,7 +172,6 @@ if (Funding == 1) or (Funding == 0):
 Runt += Funding
 
 
-Answer = 0
 Answer = LikelyHood(Runt)
 print('This is the Total Score: ' + str(Answer))
 print('This is the Colum Number: ' + str(Xvalue)) #Function 2
