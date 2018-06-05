@@ -1,63 +1,40 @@
-#__import__(Main)
-
-# Connectivity = int(input('Please Select connectivity to the internet: '
-#                      '1. Open Network - Commercial ISP, '
-#                      '2. Open Network - .edu , '
-#                      '3. Open Network - NIPR , '
-#                      '4. Closed Restricted Network - SIPRNET , '
-#                      '5. Closed Restricted Network - JWICS , '
-#                      '6. Closed Restricted Network - SAP/SAR , '
-#                      '7. Closed Restricted Network - Other , '
-#                      '8. Standalone Network , '
-#                      '9. Standalone System - With Media , '
-#                      '10. Standalone System - No Media: '))
-# Connectivity = 10 - Connectivity
-
-Admin_privileges = int(input('What kind of users are logged on as?: '
-                         '1. User , '
-                         '2. Admin - Partial privileges , '
-                         '3. Admin - Elevated privileges , '
-                         '4. Does not Apply: '))
-
-# Fixes the numbering issue so 1 = 0, 2 = 1 , 3 = 2, and 4 = 0;
-# Admin_privileges -= 1
-# if(Admin_privileges == 3):
-#     Admin_privileges = 0
-# print(Admin_privileges)
 
 
-# def Maths(num):
-#     num -= 1
-#     if (num == 3):
-#         num = 0
-#     return num
-#
-# TFA = int(input('Does the system have PIK or TFA?: '
-#             '1. Yes , '
-#             '2. No , '
-#             '3. Does not Apply: '))
-# TFA = Maths(num=TFA)
-# print(TFA)
+System_name = input('Enter System Name: ')
 
-Testing = int(input('Has any Testing been compleated?: '
-                '1. Yes - Vulnerability , 2. Yes - Penetration , 3. Yes - Adversary , 4. No: '))
-if(Testing == 4):
-    Testing = 0
-else:
-    Testing = Testing * -5
+System_status = int(input('Please Chose the coresponding number for your system status.'
+                      '1. Pre-Milestone , '
+                      '2. LIRP: '))
+if System_status == 1:
+    System_status = str('Pre-Milestone')
+if System_status == 2:
+    System_status = str('LIRP')
 
-print(Testing)
+Authorizing_official = input('Please enter Authorizing Official: ')
 
-Funding = int(input('Is Funding Available: '
-                '1. Yes , 2. No , 3. Does Not Apply: '))
-# Runt += Funding
-Funding -= 1
-if (Funding == 1) or (Funding == 0):
-    When_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format)')
+Service_branch = int(input('Please Select Branch: '
+                       '1. Army , '
+                       '2. Navy , '
+                       '3. Air Force: '))
+if Service_branch == 1:
+    Service_branch = str('Army')
+if Service_branch == 2:
+    Service_branch = str('Navy')
+if Service_branch == 3:
+    Service_branch = str('Air Force')
 
-print(Funding)
+Rationale_for_waiver = input('Im lazy')
 
+Data_classification = int(input('Please Select Data Classification: '
+                            '1. U , '
+                            '2. S , '
+                            '3. TS: '))
+if Data_classification == 1:
+    Data_classification = str('Unclassified')
+if Data_classification == 2:
+    Data_classification = str('Secret')
+if Data_classification == 3:
+    Data_classification = str('Top Secret')
 
-
-
-
+arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
+print(arr)

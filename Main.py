@@ -12,29 +12,34 @@ def Maths(num):
         num = 0
     return num
 
+def LikelyHood(num):
+
+    dad = num * 5
+    return dad
+
 Runt = 0
 Total = 0
 Xvalue = 0
 
-System_name = input('Enter System Name: ')
+System_name = 'Enter System Name: '
 #test block
-System_status = int(input('Please Chose the coresponding number for your system status.'
+System_status = input('Please Chose the coresponding number for your system status.'
                       '1. Pre-Milestone , '
-                      '2. LIRP: '))
+                      '2. LIRP: ')
 
 Authorizing_official = input('Please enter Authorizing Official: ')
 
-Service_branch = int(input('Please Select Branch: '
+Service_branch = input('Please Select Branch: '
                        '1. Army , '
                        '2. Navy , '
-                       '3. Air Force: '))
+                       '3. Air Force: ')
 
 Rationale_for_waiver = input('Im lazy')
 
-Data_classification = int(input('Please Select Data Classification: '
+Data_classification = input('Please Select Data Classification: '
                             '1. U , '
                             '2. S , '
-                            '3. TS: '))
+                            '3. TS: ')
 
 
 Connectivity = int(input('Please Select connectivity to the internet: '
@@ -168,7 +173,7 @@ Runt += Funding
 
 
 Answer = 0
-Answer = Runt * 5 #Function 1
+Answer = LikelyHood(Runt)
 print('This is the Total Score: ' + str(Answer))
 print('This is the Colum Number: ' + str(Xvalue)) #Function 2
 
