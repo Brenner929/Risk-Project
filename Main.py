@@ -41,6 +41,7 @@ import xlsxwriter
 runt = 0
 likelyhood_final = 0
 impact_score = 0
+bingo = []
 
 
 #############
@@ -58,6 +59,8 @@ def scorefunction(num, num2):
     "SET STRINGS"
     "SET INT'S"
     "SET MARTIX/LIST"
+    xnx = 0
+
     arrl = [0, 4]
     arri = [0, 1]
 
@@ -94,8 +97,9 @@ def scorefunction(num, num2):
         if arri[x] == 4:                        # 4 for Very High. // No Score Higher than 4 is possible.
             arrl[x] = 'Very High'
 
-    return arri
-    return arrl
+    xnx = [0,0]
+    return xnx
+    return
 
 
 ###>- GATHERS THE BASIC STRING INFO FOR THE SYSTEM -<###        INPUT NONE / OUTPUT ARR
@@ -383,15 +387,16 @@ def likelyhood_score():
     encryption = maths(encryption)
     runt += encryption
 
-    owner = input('System Owner Approval Justification Discussion: ')
-
-    system_ato_date = input('Please enter System ATO Date in MM/DD/YYYY Format: ')
-
-    anticipated_ato_date = input("Please Enter Anticipated ATO Date in MM/DD/YYYY Format: ")
-
+    'This is commented out untill firther notice'
+    # owner = input('System Owner Approval Justification Discussion: ')
+    #
+    # system_ato_date = input('Please enter System ATO Date in MM/DD/YYYY Format: ')
+    #
+    # anticipated_ato_date = input("Please Enter Anticipated ATO Date in MM/DD/YYYY Format: ")
+    #
     impact_score = impact()
-
-    print('Additional Testing: Please leave this section blank')
+    #
+    # print('Additional Testing: Please leave this section blank')
 
     testing = int(input('Has any Testing been compleated?: '
                         '\n1.Yes - Vulnerability  \n2.Yes - Penetration  \n3. Yes - Adversary , \n4.No: '
@@ -410,12 +415,12 @@ def likelyhood_score():
 
     exsmi = input('If yes to the previous question please enter a description: ')
 
-    funding = int(input('Is Funding Available: '
-                        '\n1.Yes  \n2.No  \n0.Does Not Apply \nChoices : '))
-    funding -= 1
-    if (funding == 1) or (funding == 0):
-        when_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format)')
-    runt += funding
+    # funding = int(input('Is Funding Available: '
+    #                     '\n1.Yes  \n2.No  \n0.Does Not Apply \nChoices : '))
+    # funding -= 1
+    # if (funding == 1) or (funding == 0):
+    #     when_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format)')
+    # runt += funding // Funding should not effect the likely hood score
 
     answer = likelyhood(runt)
     return answer
@@ -426,11 +431,18 @@ def main():
     global impact_score
     global likelyhood_final
     global runt
+    global bingo
 
 
-    basicinfo()
-    likelyhood_final = likelyhood_score()
-    scorefunction(likelyhood_final, impact_score)
+
+    # basicinfo()
+    # likelyhood_final = likelyhood_score()
+    # a = scorefunction(likelyhood_final, impact_score)       #return
+
+
+    for x in range(0,3):
+        bingo[x][y].append['r'+1]
+
 
     print(impact_score)
     print(likelyhood_final)
