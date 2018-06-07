@@ -50,6 +50,15 @@ infoarr = []
 # FUNCTIONS #
 #############
 
+###>- CHECK INPUT VALIDATION -<###          INOUT REFERENCE / OUTPUT SCORE
+def check(reference, highest):
+    while True:
+        if (reference > highest) or (reference < 1):
+            reference = int(input('Invalid input! Please enter another choice: '))
+        else:
+            score = reference
+            break
+    return score
 
 ###>- PLOTS SCORE ON [x,y] GRAPH -<###       INPUT NUM, NUM2 / OUTPUT ARR , ARR2
 def scorefunction(num, num2):
@@ -98,55 +107,6 @@ def scorefunction(num, num2):
         xchart = 'Very High'
 
 
-# ###>- GATHERS THE BASIC STRING INFO FOR THE SYSTEM -<###        INPUT NONE / OUTPUT ARR
-# def basicinfo():
-#
-#     # =============
-#     # VARIABLES
-#     # =============
-#     "SET GLOBAL"
-#     "SET STRINGS"
-#     "SET INT'S"
-#     "SET MARTIX/LIST"
-#
-#     # =============
-#     # PROCESS
-#     # =============
-#
-#     System_name = input('Enter System Name: ')
-#
-#     System_status = int(input('Please Chose the coresponding number for your system status: \n1.Pre-Milestone \n2.LIRP '
-#                               '\n'
-#                               'Choice: '))
-#     if System_status == 1:
-#         System_status = str('Pre-Milestone')
-#     if System_status == 2:
-#         System_status = str('LIRP')
-#
-#     Authorizing_official = input('Please enter Authorizing Official: ')
-#
-#     Service_branch = int(input('Please Select Branch: \n1.Army \n2.Navy \n3.Air Force \nChoice: '))
-#     if Service_branch == 1:
-#         Service_branch = str('Army')
-#     if Service_branch == 2:
-#         Service_branch = str('Navy')
-#     if Service_branch == 3:
-#         Service_branch = str('Air Force')
-#
-#     Rationale_for_waiver = input('Im lazy')
-#
-#     Data_classification = int(input('Please Select Data Classification: '
-#                                     '\n1.U \n2.S \n3.TS \nChoice: '))
-#     if Data_classification == 1:
-#         Data_classification = str('Unclassified')
-#     if Data_classification == 2:
-#         Data_classification = str('Secret')
-#     if Data_classification == 3:
-#         Data_classification = str('Top Secret')
-#
-#     arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
-
-
 ###>- DOES MATH -<###         INPUT: num / OUTPUT: num
 def maths(num):
     #=============
@@ -167,7 +127,7 @@ def maths(num):
     #=============
     "Testing num for a given value"
     num -= 1                            # Subtract 1 from num
-    if (num == 3):                      # If num is equal to 3
+    if (num == 2):                      # If num is equal to 3
         num = 0                         # Set num to 0
     else:
         print('NOPE')
@@ -258,13 +218,16 @@ def impact():
     # PROCESS
     # =============
 
-    mic = int(input('Please Enter Mission Impact if Compromised: \n4.Very High \n3.High \n2.Moderate \n1.Low '
-                    '\n0.Very Low \nChoice: '))
+    mic = int(input('Please Enter Mission Impact if Compromised: \n5.Very High \n4.High \n3.Moderate \n2.Low '
+                    '\n1.Very Low \nChoice: '))
+    mic = check(mic, 5)                             # Input Validation
+    mic -= 1
     score = mic
 
-    isc = int(input('Please Enter Impact to the System if Compromised: \n4.Very High \n3.High \n2.Moderate \n1.Low '
-                    '\n0.Very Low \nChoice: '))
-
+    isc = int(input('Please Enter Impact to the System if Compromised: \n5.Very High \n4.High \n3.Moderate \n2.Low '
+                    '\n1.Very Low \nChoice: '))
+    isc = check(isc, 5)                             # Input Validation
+    isc -= 1
     if score <= isc:
         score = isc
 
@@ -288,34 +251,38 @@ def likelyhood_score():
     # PROCESS
     # =============
 
+
     connectivity = int(input('Please Select connectivity to the internet: \n1.Open Network - Commercial ISP '
-                             '\n2.Open Network - .edu , '
-                             '\n3.Open Network - NIPR , '
-                             '\n4.Closed Restricted Network - SIPRNET , '
-                             '\n5.Closed Restricted Network - JWICS , '
-                             '\n6.Closed Restricted Network - SAP/SAR , '
-                             '\n7.Closed Restricted Network - Other , '
-                             '\n8.Standalone Network , '
-                             '\n9.Standalone System - With Media , '
+                             '\n2.Open Network - .edu  '
+                             '\n3.Open Network - NIPR  '
+                             '\n4.Closed Restricted Network - SIPRNET  '
+                             '\n5.Closed Restricted Network - JWICS  '
+                             '\n6.Closed Restricted Network - SAP/SAR  '
+                             '\n7.Closed Restricted Network - Other  '
+                             '\n8.Standalone Network  '
+                             '\n9.Standalone System - With Media  '
                              '\n10.Standalone System - No Media'
                              '\nChoice: '))
-    # This Line Flips the number to the correct out put. AKA 1 will = 9 to collate with the Excel sheet scoring table.
+
+    connectivity = check(connectivity, 10)  # Input Validation
     connectivity = 10 - connectivity
     runt += connectivity
 
     system_fielded = int(input('Please select how many systems are fielded: '
-                               '\n1.1-10 , '
-                               '\n2.11-50 , '
-                               '\n3.51-100 , '
-                               '\n4.101-500 , '
+                               '\n1.1-10  '
+                               '\n2.11-50  '
+                               '\n3.51-100  '
+                               '\n4.101-500  '
                                '\n5.501+ '
                                '\nChoice: '))
+    system_fielded = check(system_fielded, 5)                                       # Input Validation
     runt += system_fielded
 
     email = int(input('Are users able to email?: '
                       '\n1.Yes  '
                       '\n0.No '
                       '\nChoice: '))
+
     runt += email
 
     web = int(input('Are users able to use a web browser?: '
@@ -332,6 +299,8 @@ def likelyhood_score():
                                  '\nChoice: '))
 
     # Fixes the numbering issue so 1 = 0, 2 = 1 , 3 = 2, and 4 = 0;
+    admin_privileges = check(admin_privileges, 4)                                   # Input Validation
+    admin_privileges -= 1
     if admin_privileges == 3:
         admin_privileges = 0
 
@@ -342,6 +311,8 @@ def likelyhood_score():
                     '\n2.No '
                     '\n3.Does not Apply'
                     '\nChoice: '))
+    # corrects for the number 3 choice due to maths function.
+    tfa = check(tfa, 3)                                                             # Input Validation
     tfa = maths(tfa)
     runt += tfa
 
@@ -350,6 +321,7 @@ def likelyhood_score():
                               '\n2.No '
                               '\n3.Does not Apply'
                               '\nChoices: '))
+    app_whitelist = check(app_whitelist, 3)                                         # Input Validation
     app_whitelist = maths(app_whitelist)
     runt += app_whitelist
 
@@ -357,7 +329,7 @@ def likelyhood_score():
                                 '\n1.Yes '
                                 '\n2.No'
                                 '\nChoices: '))
-
+    host_protection = check(host_protection, 2)                                     # Input Validation
     host_protection = maths(host_protection)
     runt += host_protection
 
@@ -365,26 +337,27 @@ def likelyhood_score():
                            '\n1.Yes  '
                            '\n2.No'
                            '\nChoices: '))
-
+    hard_ports = check(hard_ports, 2)
     hard_ports = maths(hard_ports)
     runt += hard_ports
 
     stigs = int(input('Have any STIGs been run on the system?: '
                       '\n1.Yes  '
                       '\n2.No  '
-                      '\n0. Does Not Apply:'
                       '\nChoices: '))
+    stigs = check(stigs, 2)
+    stigs = maths(stigs)
     runt += stigs
 
     encryption = int(input('Is ecnryption at rest?: '
-                           '\n1. Yes , '
-                           '\n2. No , '
-                           '\n0. Does Not Apply'
+                           '\n1.Yes  '
+                           '\n2.No  '
                            '\nChoices: '))
+    encryption = check(encryption, 2)
     encryption = maths(encryption)
     runt += encryption
 
-    'This is commented out untill firther notice'
+    'This is commented out until further notice'
     # owner = input('System Owner Approval Justification Discussion: ')
     #
     # system_ato_date = input('Please enter System ATO Date in MM/DD/YYYY Format: ')
@@ -395,22 +368,18 @@ def likelyhood_score():
     #
     # print('Additional Testing: Please leave this section blank')
 
-    testing = int(input('Has any Testing been compleated?: '
-                        '\n1.Yes - Vulnerability  \n2.Yes - Penetration  \n3. Yes - Adversary , \n4.No: '
+    testing = int(input('Has any Testing been complected?: '
+                        '\n1.Yes - Vulnerability  \n2.Yes - Penetration  \n3. Yes - Adversary  \n4.No: '
                         '\nChoices: '))
 
     # Make a negative number out of the Choice selected
+    testing = check(testing, 4)
     if testing == 4:
         testing = 0
     else:
         testing = testing * -5
     runt += testing
 
-    SMI = int(input('Were security measures implemented?: '
-                    '\n1.Yes  \n2.No  \n0.Does Not Apply \nChoices: '))
-    runt += SMI
-
-    exsmi = input('If yes to the previous question please enter a description: ')
 
     # funding = int(input('Is Funding Available: '
     #                     '\n1.Yes  \n2.No  \n0.Does Not Apply \nChoices : '))
@@ -443,7 +412,7 @@ def output():
     # =============
 
     #arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
-
+    print('')
     print('Here are your results!')
     print('System Name: ' + infoarr[0])
     print('System Status: ' + infoarr[1])
@@ -452,7 +421,8 @@ def output():
     print('Data Classification: ' + infoarr[5])
     print('')
     print('Your system risk score is as follows.\nX-Value: ' +xchart)
-    print('Y-Value: '+ ychart)
+    print('Y-Value: ' + ychart)
+
 
 def main():
 
