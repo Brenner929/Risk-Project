@@ -42,11 +42,14 @@ runt = 0
 likelyhood_final = 0
 impact_score = 0
 bingo = []
-
+xchart = ''
+ychart = ''
+infoarr = []
 
 #############
 # FUNCTIONS #
 #############
+
 
 ###>- PLOTS SCORE ON [x,y] GRAPH -<###       INPUT NUM, NUM2 / OUTPUT ARR , ARR2
 def scorefunction(num, num2):
@@ -56,99 +59,92 @@ def scorefunction(num, num2):
     # VARIABLES
     #=============
     "SET GLOBAL"
+    global xchart
+    global ychart
     "SET STRINGS"
     "SET INT'S"
     "SET MARTIX/LIST"
-    xnx = 0
 
-    arrl = [0, 4]
-    arri = [0, 1]
 
-    arrl[0] = num
-    arri[0] = num2
+    y = num
+    x = num2
 
     # =============
     # PROCESS
     # =============
 
     # Assigning the correct value to the Likelihood score.
-    for x in range(0,2):
-        if arrl[x] <= 10:                       # If 10 or less Very Low is assigned
-            arrl[x] = 'Very Low'
-        if arrl[x] in range(11, 41):            # If 11 - 40 Low is assigned
-            arrl[x] = 'Low'
-        if arrl[x] in range(40, 61):            # If 40-60 Moderate
-            arrl[x] = 'Moderate'
-        if arrl[x] in range(60, 91):            # 60-90 is High
-            arrl[x] = 'High'
-        if arrl[x] in range(91, 120):           #91 to anything else is Very High
-            arrl[x] = 'Very High'
+    if y <= 10:                       # If 10 or less Very Low is assigned
+        ychart = 'Very,Low'
+    if y in range(11, 41):            # If 11 - 40 Low is assigned
+        ychart = 'Low'
+    if y in range(40, 61):            # If 40-60 Moderate
+        ychart = 'Moderate'
+    if y in range(60, 91):            # 60-90 is High
+        ychart = 'High'
+    if y in range(91, 120):           #91 to anything else is Very High
+        ychart = 'Very High'
 
     # Assigning the correct risk to the Impact
-    for x in range(0,2):
-        if arri[x] == 0:                        # An Score of 0 equates to a Very Low Score
-            arri[x] = 'Very Low'
-        if arri[x] == 1:                        # 1 = Low
-            arri[x] = 'Low'
-        if arri[x] == 2:                        # 2 for Moderate
-            arri[x] = 'Moderate'
-        if arri[x] == 3:                        # 3 for High
-            arri[x] = 'High'
-        if arri[x] == 4:                        # 4 for Very High. // No Score Higher than 4 is possible.
-            arrl[x] = 'Very High'
-
-    xnx = [0,0]
-    return xnx
-    return
+    if x == 0:                        # An Score of 0 equates to a Very Low Score
+        xchart = 'Very Low'
+    if x == 1:                        # 1 = Low
+        xchart = 'Low'
+    if x == 2:                        # 2 for Moderate
+        xchart = 'Moderate'
+    if x == 3:                        # 3 for High
+        xchart = 'High'
+    if x == 4:                        # 4 for Very High. // No Score Higher than 4 is possible.
+        xchart = 'Very High'
 
 
-###>- GATHERS THE BASIC STRING INFO FOR THE SYSTEM -<###        INPUT NONE / OUTPUT ARR
-def basicinfo():
-
-    # =============
-    # VARIABLES
-    # =============
-    "SET GLOBAL"
-    "SET STRINGS"
-    "SET INT'S"
-    "SET MARTIX/LIST"
-
-    # =============
-    # PROCESS
-    # =============
-
-    System_name = input('Enter System Name: ')
-
-    System_status = int(input('Please Chose the coresponding number for your system status: \n1.Pre-Milestone \n2.LIRP '
-                              '\n'
-                              'Choice: '))
-    if System_status == 1:
-        System_status = str('Pre-Milestone')
-    if System_status == 2:
-        System_status = str('LIRP')
-
-    Authorizing_official = input('Please enter Authorizing Official: ')
-
-    Service_branch = int(input('Please Select Branch: \n1.Army \n2.Navy \n3.Air Force \nChoice: '))
-    if Service_branch == 1:
-        Service_branch = str('Army')
-    if Service_branch == 2:
-        Service_branch = str('Navy')
-    if Service_branch == 3:
-        Service_branch = str('Air Force')
-
-    Rationale_for_waiver = input('Im lazy')
-
-    Data_classification = int(input('Please Select Data Classification: '
-                                    '\n1.U \n2.S \n3.TS \nChoice: '))
-    if Data_classification == 1:
-        Data_classification = str('Unclassified')
-    if Data_classification == 2:
-        Data_classification = str('Secret')
-    if Data_classification == 3:
-        Data_classification = str('Top Secret')
-
-    arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
+# ###>- GATHERS THE BASIC STRING INFO FOR THE SYSTEM -<###        INPUT NONE / OUTPUT ARR
+# def basicinfo():
+#
+#     # =============
+#     # VARIABLES
+#     # =============
+#     "SET GLOBAL"
+#     "SET STRINGS"
+#     "SET INT'S"
+#     "SET MARTIX/LIST"
+#
+#     # =============
+#     # PROCESS
+#     # =============
+#
+#     System_name = input('Enter System Name: ')
+#
+#     System_status = int(input('Please Chose the coresponding number for your system status: \n1.Pre-Milestone \n2.LIRP '
+#                               '\n'
+#                               'Choice: '))
+#     if System_status == 1:
+#         System_status = str('Pre-Milestone')
+#     if System_status == 2:
+#         System_status = str('LIRP')
+#
+#     Authorizing_official = input('Please enter Authorizing Official: ')
+#
+#     Service_branch = int(input('Please Select Branch: \n1.Army \n2.Navy \n3.Air Force \nChoice: '))
+#     if Service_branch == 1:
+#         Service_branch = str('Army')
+#     if Service_branch == 2:
+#         Service_branch = str('Navy')
+#     if Service_branch == 3:
+#         Service_branch = str('Air Force')
+#
+#     Rationale_for_waiver = input('Im lazy')
+#
+#     Data_classification = int(input('Please Select Data Classification: '
+#                                     '\n1.U \n2.S \n3.TS \nChoice: '))
+#     if Data_classification == 1:
+#         Data_classification = str('Unclassified')
+#     if Data_classification == 2:
+#         Data_classification = str('Secret')
+#     if Data_classification == 3:
+#         Data_classification = str('Top Secret')
+#
+#     arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
 
 
 ###>- DOES MATH -<###         INPUT: num / OUTPUT: num
@@ -244,7 +240,8 @@ def basicInfo():
     if Data_classification == 3:
         Data_classification = str('Top Secret')
 
-    arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
+    arr = System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification
+    return arr
 
 
 ###>- GATHERS THE IMPACT SCORE -<###            INPUT NONE / OUTPUT SCORE
@@ -426,22 +423,54 @@ def likelyhood_score():
     return answer
 
 
+def output():
+
+    # =============
+    # VARIABLES
+    # =============
+    "SET GLOBAL"
+    global impact_score
+    global likelyhood_final
+    global infoarr
+    global xchart
+    global ychart
+    "SET STRINGS"
+    "SET INT'S"
+    "SET MARTIX/LIST"
+
+    # =============
+    # PROCESS
+    # =============
+
+    #arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
+
+    print('Here are your results!')
+    print('System Name: ' + infoarr[0])
+    print('System Status: ' + infoarr[1])
+    print('Authorizing Official: ' + infoarr[2])
+    print('Service Branch: ' + infoarr[3])
+    print('Data Classification: ' + infoarr[5])
+    print('')
+    print('Your system risk score is as follows.\nX-Value: ' +xchart)
+    print('Y-Value: '+ ychart)
+
 def main():
 
     global impact_score
     global likelyhood_final
     global runt
     global bingo
-
+    global infoarr
 
 
     # basicinfo()
     # likelyhood_final = likelyhood_score()
-    # a = scorefunction(likelyhood_final, impact_score)       #return
+    # scorefunction(likelyhood_final, impact_score)       #return
 
-
-    for x in range(0,3):
-        bingo[x][y].append['r'+1]
+    infoarr = basicInfo()
+    likelyhood_final = likelyhood_score()
+    scorefunction(likelyhood_final, impact_score)
+    output()
 
 
     print(impact_score)
@@ -454,19 +483,3 @@ main()
 
 
 
-
-# Function 3 Bellow
-
-
-# def Al(Runt):
-#
-#     answer = 0
-#
-#     x=0
-#     y=0
-#     y += answer
-#     while(x<y):
-#     Total += 5
-#     x += 1
-#
-#     RunT += Total
