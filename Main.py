@@ -1,7 +1,7 @@
 
 
 
-# DOES NOT APPLY does not work untill it is switched to option 0
+# Higest score is 120
 # This will be the quetions that will be asked
 
 # function for some yes no problems
@@ -91,7 +91,7 @@ def scorefunction(num, num2):
         ychart = 'Moderate'
     if y in range(60, 91):            # 60-90 is High
         ychart = 'High'
-    if y in range(91, 120):           #91 to anything else is Very High
+    if y in range(91, 125):           #91 to anything else is Very High
         ychart = 'Very High'
 
     # Assigning the correct risk to the Impact
