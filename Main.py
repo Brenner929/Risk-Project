@@ -120,17 +120,17 @@ def scorefunction(num, num2):
     if y in range(91, 125):           #91 to anything else is Very High
         ychart = 4
 
-    # # Assigning the correct risk to the Impact
-    # if x == 0:                        # An Score of 0 equates to a Very Low Score
-    #     xchart = 'Very Low'
-    # if x == 1:                        # 1 = Low
-    #     xchart = 'Low'
-    # if x == 2:                        # 2 for Moderate
-    #     xchart = 'Moderate'
-    # if x == 3:                        # 3 for High
-    #     xchart = 'High'
-    # if x == 4:                        # 4 for Very High. // No Score Higher than 4 is possible.
-    #     xchart = 'Very High'
+    # Assigning the correct risk to the Impact
+    if x == 0:                        # An Score of 0 equates to a Very Low Score
+        xchart = 0
+    if x == 1:                        # 1 = Low
+        xchart = 1
+    if x == 2:                        # 2 for Moderate
+        xchart = 2
+    if x == 3:                        # 3 for High
+        xchart = 3
+    if x == 4:                        # 4 for Very High. // No Score Higher than 4 is possible.
+        xchart = 4
 
 
 ###>- DOES MATH -<###         INPUT: num / OUTPUT: num
@@ -452,60 +452,65 @@ def plot(xval, yval):
 
     b = 'R'
     if xval == 0:
-        if yval == 0:
+        if yval == 4:
             zero.append(b)
-        if yval == 1:
-            one.append(b)
-        if yval == 2:
-            two.append(b)
         if yval == 3:
-            three.append(b)
-        if yval == 4:
-            four.append(b)
-    if xval == 1:
-        if yval == 0:
             five.append(b)
-        if yval == 1:
-            six.append(b)
         if yval == 2:
-            seven.append(b)
-        if yval == 3:
-            eight.append(b)
-        if yval == 4:
-            nine.append(b)
-    if xval == 2:
-        if yval == 0:
             ten.append(b)
         if yval == 1:
-            eleven.append(b)
-        if yval == 2:
-            twelve.append(b)
-        if yval == 3:
-            thirteen.append(b)
-        if yval == 4:
-            fourteen.append(b)
-    if xval == 3:
-        if  yval == 0:
             fifteen.append(b)
-        if yval == 1:
-            sixteen.append(b)
-        if yval == 2:
-            seventeen.append(b)
-        if yval == 3:
-            eighteen.append(b)
-        if yval == 4:
-            nineteen.append(b)
-    if xval == 4:
         if yval == 0:
             twenty.append(b)
-        if yval == 1:
-            twenty_one.append(b)
-        if yval == 2:
-            twenty_two.append(b)
-        if yval == 3:
-            twenty_three.append(b)
+    if xval == 1:
         if yval == 4:
+            one.append(b)
+        if yval == 3:
+            six.append(b)
+        if yval == 2:
+            eleven.append(b)
+        if yval == 1:
+            sixteen.append(b)
+        if yval == 0:
+            twenty_one.append(b)
+    if xval == 2:
+        if yval == 4:
+            two.append(b)
+        if yval == 3:
+            seven.append(b)
+        if yval == 2:
+            twelve.append(b)
+        if yval == 1:
+            seventeen.append(b)
+        if yval == 0:
+            twenty_two.append(b)
+    if xval == 3:
+        if  yval == 4:
+            three.append(b)
+        if yval == 3:
+            eight.append(b)
+        if yval == 2:
+            thirteen.append(b)
+        if yval == 1:
+            eighteen.append(b)
+        if yval == 0:
+            twenty_three.append(b)
+    if xval == 4:
+        if yval == 4:
+            four.append(b)
+        if yval == 3:
+            nine.append(b)
+        if yval == 2:
+            fourteen.append(b)
+        if yval == 1:
+            nineteen.append(b)
+        if yval == 0:
             twenty_four.append(b)
+    print(zero, one, two, three, four)
+    print(five, six, seven, eight, nine)
+    print(ten, eleven, twelve, thirteen, fourteen)
+    print(fifteen, sixteen, seventeen, eighteen, nineteen)
+    print(twenty, twenty_one, twenty_two, twenty_three, twenty_four)
 
 
 
