@@ -10,7 +10,7 @@
 Creation Date:      6/4/2018
 Original Author:    Christian Brenner, Matt Salvo, BMCS
 Version Author:
-Version:            0.1
+Version:            0.1.4
 Version Date:
 '''
 
@@ -42,9 +42,35 @@ runt = 0
 likelyhood_final = 0
 impact_score = 0
 bingo = []
-xchart = ''
-ychart = ''
+xchart = 0
+ychart = 0
 infoarr = []
+a = 1
+zero = []
+one = []
+two = []
+three = []
+four = []
+five = []
+six = []
+seven = []
+eight = []
+nine = []
+ten = []
+eleven = []
+twelve = []
+thirteen = []
+fourteen = []
+fifteen = []
+sixteen = []
+seventeen = []
+eighteen = []
+nineteen = []
+twenty = []
+twenty_one = []
+twenty_two = []
+twenty_three = []
+twenty_four = []
 
 #############
 # FUNCTIONS #
@@ -84,27 +110,27 @@ def scorefunction(num, num2):
 
     # Assigning the correct value to the Likelihood score.
     if y <= 10:                       # If 10 or less Very Low is assigned
-        ychart = 'Very,Low'
+        ychart = 0
     if y in range(11, 41):            # If 11 - 40 Low is assigned
-        ychart = 'Low'
+        ychart = 1
     if y in range(40, 61):            # If 40-60 Moderate
-        ychart = 'Moderate'
+        ychart = 2
     if y in range(60, 91):            # 60-90 is High
-        ychart = 'High'
+        ychart = 3
     if y in range(91, 125):           #91 to anything else is Very High
-        ychart = 'Very High'
+        ychart = 4
 
-    # Assigning the correct risk to the Impact
-    if x == 0:                        # An Score of 0 equates to a Very Low Score
-        xchart = 'Very Low'
-    if x == 1:                        # 1 = Low
-        xchart = 'Low'
-    if x == 2:                        # 2 for Moderate
-        xchart = 'Moderate'
-    if x == 3:                        # 3 for High
-        xchart = 'High'
-    if x == 4:                        # 4 for Very High. // No Score Higher than 4 is possible.
-        xchart = 'Very High'
+    # # Assigning the correct risk to the Impact
+    # if x == 0:                        # An Score of 0 equates to a Very Low Score
+    #     xchart = 'Very Low'
+    # if x == 1:                        # 1 = Low
+    #     xchart = 'Low'
+    # if x == 2:                        # 2 for Moderate
+    #     xchart = 'Moderate'
+    # if x == 3:                        # 3 for High
+    #     xchart = 'High'
+    # if x == 4:                        # 4 for Very High. // No Score Higher than 4 is possible.
+    #     xchart = 'Very High'
 
 
 ###>- DOES MATH -<###         INPUT: num / OUTPUT: num
@@ -391,6 +417,97 @@ def likelyhood_score():
     answer = likelyhood(runt)
     return answer
 
+###>- PLOTS LIKELYHOOD AND IMPACT ON A 23 FLAT DATA LIST
+def plot(xval, yval):
+    ####################
+    # GLOBAL VARIABLES #
+    ####################
+    global zero
+    global one
+    global two
+    global three
+    global four
+    global five
+    global six
+    global seven
+    global eight
+    global nine
+    global ten
+    global eleven
+    global twelve
+    global thirteen
+    global fourteen
+    global fifteen
+    global sixteen
+    global seventeen
+    global eighteen
+    global nineteen
+    global twenty
+    global twenty_one
+    global twenty_two
+    global twenty_three
+    global twenty_four
+    global a
+
+
+    b = 'R'
+    if xval == 0:
+        if yval == 0:
+            zero.append(b)
+        if yval == 1:
+            one.append(b)
+        if yval == 2:
+            two.append(b)
+        if yval == 3:
+            three.append(b)
+        if yval == 4:
+            four.append(b)
+    if xval == 1:
+        if yval == 0:
+            five.append(b)
+        if yval == 1:
+            six.append(b)
+        if yval == 2:
+            seven.append(b)
+        if yval == 3:
+            eight.append(b)
+        if yval == 4:
+            nine.append(b)
+    if xval == 2:
+        if yval == 0:
+            ten.append(b)
+        if yval == 1:
+            eleven.append(b)
+        if yval == 2:
+            twelve.append(b)
+        if yval == 3:
+            thirteen.append(b)
+        if yval == 4:
+            fourteen.append(b)
+    if xval == 3:
+        if  yval == 0:
+            fifteen.append(b)
+        if yval == 1:
+            sixteen.append(b)
+        if yval == 2:
+            seventeen.append(b)
+        if yval == 3:
+            eighteen.append(b)
+        if yval == 4:
+            nineteen.append(b)
+    if xval == 4:
+        if yval == 0:
+            twenty.append(b)
+        if yval == 1:
+            twenty_one.append(b)
+        if yval == 2:
+            twenty_two.append(b)
+        if yval == 3:
+            twenty_three.append(b)
+        if yval == 4:
+            twenty_four.append(b)
+
+
 
 def output():
 
@@ -420,8 +537,8 @@ def output():
     print('Service Branch: ' + infoarr[3])
     print('Data Classification: ' + infoarr[5])
     print('')
-    print('Your system risk score is as follows.\nX-Value: ' +xchart)
-    print('Y-Value: ' + ychart)
+    print('Your system risk score is as follows.\nX-Value: ' + str(xchart))
+    #print('Y-Value: ' + ychart)
 
 
 def main():
@@ -431,7 +548,8 @@ def main():
     global runt
     global bingo
     global infoarr
-
+    global xchart
+    global ychart
 
     # basicinfo()
     # likelyhood_final = likelyhood_score()
@@ -441,10 +559,9 @@ def main():
     likelyhood_final = likelyhood_score()
     scorefunction(likelyhood_final, impact_score)
     output()
-
-
-    print(impact_score)
-    print(likelyhood_final)
+    plot(xchart, ychart)
+    print("Impact ", impact_score)
+    print("LikelyHood ", likelyhood_final)
     return 0
 
 
