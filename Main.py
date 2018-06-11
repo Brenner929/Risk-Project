@@ -10,7 +10,7 @@
 Creation Date:      6/4/2018
 Original Author:    Christian Brenner, Matt Salvo, BMCS
 Version Author:
-Version:            0.1.4
+Version:            0.2.8
 Version Date:
 '''
 
@@ -41,7 +41,6 @@ import xlsxwriter
 runt = 0
 likelyhood_final = 0
 impact_score = 0
-bingo = []
 xchart = 0
 ychart = 0
 infoarr = []
