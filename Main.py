@@ -10,7 +10,7 @@
 Creation Date:      6/4/2018
 Original Author:    Christian Brenner, Matt Salvo, BMCS
 Version Author:
-Version:            0.2.8
+Version:            0.3.2
 Version Date:
 '''
 
@@ -76,14 +76,18 @@ twenty_four = []
 #############
 
 ###>- CHECK INPUT VALIDATION -<###          INOUT REFERENCE / OUTPUT SCORE
-def check(reference, highest):
+def check_zero(prompt, highest):
     while True:
-        if (reference > highest) or (reference < 1):
-            reference = int(input('Invalid input! Please enter another choice: '))
+        try:
+            value = int(input(prompt))
+        except ValueError:
+            print("Sorry, that input is not valid")
+            continue
+        if (value > highest) or (value < 0):
+            print("Please enter a correct answer")
         else:
-            score = reference
             break
-    return score
+    return value
 
 ###>- PLOTS SCORE ON [x,y] GRAPH -<###       INPUT NUM, NUM2 / OUTPUT ARR , ARR2
 def scorefunction(num, num2):
@@ -196,9 +200,11 @@ def basicInfo():
 
     System_name = input('Enter System Name: ')
 
-    System_status = int(input('Please Chose the coresponding number for your system status: \n1.Pre-Milestone \n2.LIRP '
-                              '\n'
-                              'Choice: '))
+    system_description = input(' Enter System Description: ')
+
+    System_status = check_int("Please Chose the corresponding number for your system status: \n1.Pre-Milestone \n2.LIRP "
+                              "\n"
+                              "Choice: ", 2)
     if System_status == 1:
         System_status = str('Pre-Milestone')
     if System_status == 2:
@@ -206,7 +212,7 @@ def basicInfo():
 
     Authorizing_official = input('Please enter Authorizing Official: ')
 
-    Service_branch = int(input('Please Select Branch: \n1.Army \n2.Navy \n3.Air Force \nChoice: '))
+    Service_branch = check_int("Please Select Branch: \n1.Army \n2.Navy \n3.Air Force \nChoice: ", 3)
     if Service_branch == 1:
         Service_branch = str('Army')
     if Service_branch == 2:
@@ -214,10 +220,10 @@ def basicInfo():
     if Service_branch == 3:
         Service_branch = str('Air Force')
 
-    Rationale_for_waiver = input('Im lazy')
+    # Rationale_for_waiver = input('Im lazy')
 
-    Data_classification = int(input('Please Select Data Classification: '
-                                    '\n1.U \n2.S \n3.TS \nChoice: '))
+    Data_classification = check_int("Please Select Data Classification: "
+                                    "\n1.U \n2.S \n3.TS \nChoice: ", 3)
     if Data_classification == 1:
         Data_classification = str('Unclassified')
     if Data_classification == 2:
@@ -225,7 +231,7 @@ def basicInfo():
     if Data_classification == 3:
         Data_classification = str('Top Secret')
 
-    arr = System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification
+    arr = System_name, System_status, Authorizing_official, Service_branch, Data_classification, system_description
     return arr
 
 
@@ -243,15 +249,13 @@ def impact():
     # PROCESS
     # =============
 
-    mic = int(input('Please Enter Mission Impact if Compromised: \n5.Very High \n4.High \n3.Moderate \n2.Low '
-                    '\n1.Very Low \nChoice: '))
-    mic = check(mic, 5)                             # Input Validation
+    mic = check_int("Please Enter Mission Impact if Compromised: \n5.Very High \n4.High \n3.Moderate \n2.Low "
+                    "\n1.Very Low \nChoice: ", 5)                           # Input Validation
     mic -= 1
     score = mic
 
-    isc = int(input('Please Enter Impact to the System if Compromised: \n5.Very High \n4.High \n3.Moderate \n2.Low '
-                    '\n1.Very Low \nChoice: '))
-    isc = check(isc, 5)                             # Input Validation
+    isc = check_int("Please Enter Impact to the System if Compromised: \n5.Very High \n4.High \n3.Moderate \n2.Low "
+                    "\n1.Very Low \nChoice: ", 5)                        # Input Validation
     isc -= 1
     if score <= isc:
         score = isc
@@ -277,108 +281,108 @@ def likelyhood_score():
     # =============
 
 
-    connectivity = int(input('Please Select connectivity to the internet: \n1.Open Network - Commercial ISP '
-                             '\n2.Open Network - .edu  '
-                             '\n3.Open Network - NIPR  '
-                             '\n4.Closed Restricted Network - SIPRNET  '
-                             '\n5.Closed Restricted Network - JWICS  '
-                             '\n6.Closed Restricted Network - SAP/SAR  '
-                             '\n7.Closed Restricted Network - Other  '
-                             '\n8.Standalone Network  '
-                             '\n9.Standalone System - With Media  '
-                             '\n10.Standalone System - No Media'
-                             '\nChoice: '))
 
-    connectivity = check(connectivity, 10)  # Input Validation
+    connectivity = check_int("Please Select connectivity to the internet: \n1.Open Network - Commercial ISP "
+                             "\n2.Open Network - .edu  "
+                             "\n3.Open Network - NIPR  "
+                             "\n4.Closed Restricted Network - SIPRNET  "
+                             "\n5.Closed Restricted Network - JWICS  "
+                             "\n6.Closed Restricted Network - SAP/SAR  "
+                             "\n7.Closed Restricted Network - Other  "
+                             "\n8.Standalone Network  "
+                             "\n9.Standalone System - With Media  "
+                             "\n10.Standalone System - No Media"
+                             "\nChoice: ", 10)
+
     connectivity = 10 - connectivity
     runt += connectivity
 
-    system_fielded = int(input('Please select how many systems are fielded: '
-                               '\n1.1-10  '
-                               '\n2.11-50  '
-                               '\n3.51-100  '
-                               '\n4.101-500  '
-                               '\n5.501+ '
-                               '\nChoice: '))
-    system_fielded = check(system_fielded, 5)                                       # Input Validation
+    system_fielded = check_int("Please select how many systems are fielded: "
+                               "\n1.1-10  "
+                               "\n2.11-50  "
+                               "\n3.51-100  "
+                               "\n4.101-500  "
+                               "\n5.501+ "
+                               "\nChoice: ", 5)
+
     runt += system_fielded
 
-    email = int(input('Are users able to email?: '
-                      '\n1.Yes  '
-                      '\n0.No '
-                      '\nChoice: '))
+    email = check_zero("Are users able to email?: "
+                      "\n1.Yes  "
+                      "\n0.No "
+                      "\nChoice: ", 1)
 
     runt += email
 
-    web = int(input('Are users able to use a web browser?: '
-                    '\n1.Yes  '
-                    '\n0.No '
-                    '\nChoice: '))
+    web = check_zero("Are users able to use a web browser?: "
+                    "\n1.Yes  "
+                    "\n0.No "
+                    "\nChoice: ", 1)
+
     runt += web
 
-    admin_privileges = int(input('What kind of users are logged on as?: '
-                                 '\n1.User '
-                                 '\n2.Admin - Partial privileges '
-                                 '\n3.Admin - Elevated privileges '
-                                 '\n4.Does not Apply'
-                                 '\nChoice: '))
+    admin_privileges = check_int("What kind of users are logged on as?: "
+                                 "\n1.User "
+                                 "\n2.Admin - Partial privileges "
+                                 "\n3.Admin - Elevated privileges "
+                                 "\n4.Does not Apply"
+                                 "\nChoice: ", 4)
 
-    # Fixes the numbering issue so 1 = 0, 2 = 1 , 3 = 2, and 4 = 0;
-    admin_privileges = check(admin_privileges, 4)                                   # Input Validation
+    # Fixes the numbering issue so 1 = 0, 2 = 1 , 3 = 2, and 4 = 0                                  # Input Validation
     admin_privileges -= 1
     if admin_privileges == 3:
         admin_privileges = 0
 
     runt += admin_privileges
 
-    tfa = int(input('Does the system have PIK or TFA?: '
-                    '\n1.Yes '
-                    '\n2.No '
-                    '\n3.Does not Apply'
-                    '\nChoice: '))
+    tfa = check_int("Does the system have PIK or TFA?: "
+                    "\n1.Yes "
+                    "\n2.No "
+                    "\n3.Does not Apply"
+                    "\nChoice: ", 3)
     # corrects for the number 3 choice due to maths function.
-    tfa = check(tfa, 3)                                                             # Input Validation
+                                                              # Input Validation
     tfa = maths(tfa)
     runt += tfa
 
-    app_whitelist = int(input('Use a App whitelisting capability?: '
-                              '\n1.Yes '
-                              '\n2.No '
-                              '\n3.Does not Apply'
-                              '\nChoices: '))
-    app_whitelist = check(app_whitelist, 3)                                         # Input Validation
+    app_whitelist = check_int("Use a App whitelisting capability?: "
+                              "\n1.Yes "
+                              "\n2.No "
+                              "\n3.Does not Apply"
+                              "\nChoices: ", 3)
+                                           # Input Validation
     app_whitelist = maths(app_whitelist)
     runt += app_whitelist
 
-    host_protection = int(input('Uses Host Based Protection?: '
-                                '\n1.Yes '
-                                '\n2.No'
-                                '\nChoices: '))
-    host_protection = check(host_protection, 2)                                     # Input Validation
+    host_protection = check_int("Uses Host Based Protection?: "
+                                "\n1.Yes "
+                                "\n2.No"
+                                "\nChoices: ", 2)
+
+                                      # Input Validation
     host_protection = maths(host_protection)
     runt += host_protection
 
-    hard_ports = int(input('Are the unused ports (Ethernet/USB) disabled on the system?: '
-                           '\n1.Yes  '
-                           '\n2.No'
-                           '\nChoices: '))
-    hard_ports = check(hard_ports, 2)
+    hard_ports = check_int("Are the unused ports (Ethernet/USB) disabled on the system?: "
+                           "\n1.Yes  "
+                           "\n2.No"
+                           "\nChoices: ", 2)
     hard_ports = maths(hard_ports)
     runt += hard_ports
 
-    stigs = int(input('Have any STIGs been run on the system?: '
-                      '\n1.Yes  '
-                      '\n2.No  '
-                      '\nChoices: '))
-    stigs = check(stigs, 2)
+    stigs = check_int("Have any STIGs been run on the system?: "
+                      "\n1.Yes  "
+                      "\n2.No  "
+                      "\nChoices: ", 2)
+
     stigs = maths(stigs)
     runt += stigs
 
-    encryption = int(input('Is ecnryption at rest?: '
-                           '\n1.Yes  '
-                           '\n2.No  '
-                           '\nChoices: '))
-    encryption = check(encryption, 2)
+    encryption = check_int("Is ecnryption at rest?: "
+                           "\n1.Yes  "
+                           "\n2.No  "
+                           "\nChoices: ", 2)
+
     encryption = maths(encryption)
     runt += encryption
 
@@ -393,12 +397,11 @@ def likelyhood_score():
     #
     # print('Additional Testing: Please leave this section blank')
 
-    testing = int(input('Has any Testing been complected?: '
-                        '\n1.Yes - Vulnerability  \n2.Yes - Penetration  \n3. Yes - Adversary  \n4.No: '
-                        '\nChoices: '))
+    testing = check_int("Has any Testing been complected?: "
+                        "\n1.Yes - Vulnerability  \n2.Yes - Penetration  \n3. Yes - Adversary  \n4.No: "
+                        "\nChoices: ", 4)
 
     # Make a negative number out of the Choice selected
-    testing = check(testing, 4)
     if testing == 4:
         testing = 0
     else:
@@ -512,6 +515,19 @@ def plot(xval, yval):
     print(twenty, twenty_one, twenty_two, twenty_three, twenty_four)
 
 
+def check_int(prompt, highest):
+    while True:
+       try:
+           value = int(input(prompt))
+       except ValueError:
+           print("Sorry, that input is not valid")
+           continue
+       if (value > highest) or (value < 1):
+           print("Please enter a correct answer")
+       else:
+           break
+
+    return value
 
 def output():
 
@@ -536,10 +552,11 @@ def output():
     print('')
     print('Here are your results!')
     print('System Name: ' + infoarr[0])
+    print('System Description') + infoarr[5])
     print('System Status: ' + infoarr[1])
     print('Authorizing Official: ' + infoarr[2])
     print('Service Branch: ' + infoarr[3])
-    print('Data Classification: ' + infoarr[5])
+    print('Data Classification: ' + infoarr[4])
     print('')
     print('Your system risk score is as follows.\nX-Value: ' + str(xchart))
     #print('Y-Value: ' + ychart)
