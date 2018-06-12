@@ -1,18 +1,18 @@
 
 
 
-# Higest score is 120
-# This will be the quetions that will be asked
+# Highest score is 120
+# This will be the questions that will be asked
 
 # function for some yes no problems
 # This function takes the Yes/No options and correctly outputs the numerical that is assoated with the excel sheet
-'''
+"""
 Creation Date:      6/4/2018
 Original Author:    Christian Brenner, Matt Salvo, BMCS
 Version Author:
 Version:            0.3.2
 Version Date:
-'''
+"""
 
 
 ####################
@@ -552,13 +552,13 @@ def output():
     print('')
     print('Here are your results!')
     print('System Name: ' + infoarr[0])
-    print('System Description') + infoarr[5])
+    print('System Description' + infoarr[5])
     print('System Status: ' + infoarr[1])
     print('Authorizing Official: ' + infoarr[2])
     print('Service Branch: ' + infoarr[3])
     print('Data Classification: ' + infoarr[4])
     print('')
-    print('Your system risk score is as follows.\nX-Value: ' + str(xchart))
+    print('Your system risk score is as follows.\n')
     #print('Y-Value: ' + ychart)
 
 
