@@ -71,7 +71,8 @@ twenty_two = []
 twenty_three = []
 twenty_four = []
 save = []
-
+systemlist = []
+arr = []
 #############
 # FUNCTIONS #
 #############
@@ -194,6 +195,7 @@ def basicInfo():
     # VARIABLES
     # =============
     "SET GLOBAL"                            # Asking the user basic questions for referencing the system
+    global systemlist
     "SET STRINGS"                           # being tested at the time.
     "SET INT'S"
     "SET MARTIX/LIST"
@@ -235,7 +237,13 @@ def basicInfo():
         Data_classification = str('Top Secret')
 
     # arr is used for output and storage.
-    arr = System_name, System_status, Authorizing_official, Service_branch, Data_classification, system_description
+    arr.append(System_name)
+    arr.append(System_status)
+    arr.append(Authorizing_official)
+    arr.append(Service_branch)
+    arr.append(Data_classification)
+    arr.append(system_description)
+    systemlist.append(System_name)
     return arr
 
 
@@ -593,6 +601,40 @@ def menu():
             break
     quit()
 
+
+def save():
+    # =============
+    # VARIABLES
+    # =============
+    "SET GLOBAL"        # Asking the user basic questions for referencing the system
+    global arr
+    global systemlist
+    "SET STRINGS"                           # being tested at the time.
+    "SET INT'S"
+    choisetemp = 0
+    numtemp = 1
+    "SET MARTIX/LIST"
+
+    # =============
+    # PROCESS
+    # =============
+
+    # List Systems
+    temp = len(systemlist)
+    print("Please select system.: ")
+    for x in range (0, temp):
+        print(numtemp, systemlist[x])
+        numtemp += 1
+
+    choisetemp = int(input("Select Here: "))
+    # check data entry here
+    # need if statements for 1
+
+    choisetemp *= 8
+    choisetemp -= 8
+    finaltemp = choisetemp + 8
+    for x in range (choisetemp, finaltemp):
+        print(arr[x])
 
 
 
