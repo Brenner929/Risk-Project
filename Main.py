@@ -70,6 +70,7 @@ twenty_one = []
 twenty_two = []
 twenty_three = []
 twenty_four = []
+save = []
 
 #############
 # FUNCTIONS #
@@ -577,6 +578,24 @@ def output():
     #print('Y-Value: ' + ychart)
 
 
+def menu():
+    print("This is a Risk Scoring Tool\n")
+    print("Would you like to enter system information?: ")
+    print("Y/N")
+    print(" ")
+    choice = input()
+    while True:
+        if choice == ("y" or "Y"):
+            main()
+            input("Would you like to Add another system?: ")
+        elif choice == ("n" or "N"):
+            print("Thank you for using the program")
+            break
+    quit()
+
+
+
+
 def main():
 
     global impact_score
@@ -601,7 +620,8 @@ def main():
     return 0
 
 
-main()
+menu()
+
 
 
 
