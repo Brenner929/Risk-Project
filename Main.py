@@ -77,13 +77,23 @@ twenty_four = []
 
 ###>- CHECK INPUT VALIDATION -<###          INOUT REFERENCE / OUTPUT SCORE
 def check_zero(prompt, highest):
+    # =============
+    # VARIABLES
+    # =============
+    "SET GLOBAL"
+    "SET STRINGS"
+    "SET INT'S"
+    "SET MARTIX/LIST"
+    # =============
+    # PROCESS
+    # =============
     while True:
         try:
-            value = int(input(prompt))
+            value = int(input(prompt))          # Checking for int input
         except ValueError:
             print("Sorry, that input is not valid")
             continue
-        if (value > highest) or (value < 0):
+        if (value > highest) or (value < 0):    # limit answers to choices including 0
             print("Please enter a correct answer")
         else:
             break
@@ -101,11 +111,10 @@ def scorefunction(num, num2):
     global ychart
     "SET STRINGS"
     "SET INT'S"
-    "SET MARTIX/LIST"
-
-
     y = num
     x = num2
+    "SET MARTIX/LIST"
+
 
     # =============
     # PROCESS
@@ -120,7 +129,7 @@ def scorefunction(num, num2):
         ychart = 2
     if y in range(60, 91):            # 60-90 is High
         ychart = 3
-    if y in range(91, 125):           #91 to anything else is Very High
+    if y in range(91, 125):           # 91 to anything else is Very High
         ychart = 4
 
     # Assigning the correct risk to the Impact
@@ -144,13 +153,8 @@ def maths(num):
     "Set Global"
     global runt
     "Set Strings"
-    tomCat = ""
     "Set Int's"
-    getGood = 0
     "Set Martix/list"
-    adminMatrix = []
-    santasList = []
-
     #=============
     # PROCESS
     #=============
@@ -161,23 +165,22 @@ def maths(num):
     else:
         print('NOPE')
     # END IF:ELSE
-
-
     "End Function"
     return num
 
 
 ###>- CALCULATES LIKELY HOOD SCORE -<###         INPUT NUM / OUTPUT SCORE
 def likelyhood(num):
+    #=============
+    # VARIABLES
+    #=============
     "SET GLOBAL"
     "SET STRINGS"
     "SET INT'S"
     "SET MARTIX/LIST"
-
     # =============
     # PROCESS
     # =============
-
     # TAKES THE INPUT AND * 5 TO IT FOR A CORRECT SCORE
     score = num * 5
     return score
@@ -189,8 +192,8 @@ def basicInfo():
     # =============
     # VARIABLES
     # =============
-    "SET GLOBAL"
-    "SET STRINGS"
+    "SET GLOBAL"                            # Asking the user basic questions for referencing the system
+    "SET STRINGS"                           # being tested at the time.
     "SET INT'S"
     "SET MARTIX/LIST"
 
@@ -220,7 +223,6 @@ def basicInfo():
     if Service_branch == 3:
         Service_branch = str('Air Force')
 
-    # Rationale_for_waiver = input('Im lazy')
 
     Data_classification = check_int("Please Select Data Classification: "
                                     "\n1.U \n2.S \n3.TS \nChoice: ", 3)
@@ -231,6 +233,7 @@ def basicInfo():
     if Data_classification == 3:
         Data_classification = str('Top Secret')
 
+    # arr is used for output and storage.
     arr = System_name, System_status, Authorizing_official, Service_branch, Data_classification, system_description
     return arr
 
@@ -249,15 +252,16 @@ def impact():
     # PROCESS
     # =============
 
+    # Checking one section of the impact score.
     mic = check_int("Please Enter Mission Impact if Compromised: \n5.Very High \n4.High \n3.Moderate \n2.Low "
                     "\n1.Very Low \nChoice: ", 5)                           # Input Validation
     mic -= 1
     score = mic
-
+    # Checking other
     isc = check_int("Please Enter Impact to the System if Compromised: \n5.Very High \n4.High \n3.Moderate \n2.Low "
                     "\n1.Very Low \nChoice: ", 5)                        # Input Validation
     isc -= 1
-    if score <= isc:
+    if score <= isc:        # Comparing scores and using the higher value for the risk
         score = isc
 
     return score
@@ -273,7 +277,7 @@ def likelyhood_score():
     global runt
     "SET STRINGS"
     "SET INT'S"
-    answer = 0
+    answer = 0          # only used to clear any possible data in the var
     "SET MARTIX/LIST"
 
     # =============
@@ -328,7 +332,6 @@ def likelyhood_score():
                                  "\n4.Does not Apply"
                                  "\nChoice: ", 4)
 
-    # Fixes the numbering issue so 1 = 0, 2 = 1 , 3 = 2, and 4 = 0                                  # Input Validation
     admin_privileges -= 1
     if admin_privileges == 3:
         admin_privileges = 0
@@ -341,7 +344,7 @@ def likelyhood_score():
                     "\n3.Does not Apply"
                     "\nChoice: ", 3)
     # corrects for the number 3 choice due to maths function.
-                                                              # Input Validation
+
     tfa = maths(tfa)
     runt += tfa
 
@@ -350,7 +353,7 @@ def likelyhood_score():
                               "\n2.No "
                               "\n3.Does not Apply"
                               "\nChoices: ", 3)
-                                           # Input Validation
+
     app_whitelist = maths(app_whitelist)
     runt += app_whitelist
 
@@ -359,7 +362,7 @@ def likelyhood_score():
                                 "\n2.No"
                                 "\nChoices: ", 2)
 
-                                      # Input Validation
+
     host_protection = maths(host_protection)
     runt += host_protection
 
@@ -378,7 +381,7 @@ def likelyhood_score():
     stigs = maths(stigs)
     runt += stigs
 
-    encryption = check_int("Is ecnryption at rest?: "
+    encryption = check_int("Is encryption at rest?: "
                            "\n1.Yes  "
                            "\n2.No  "
                            "\nChoices: ", 2)
@@ -419,11 +422,13 @@ def likelyhood_score():
     answer = likelyhood(runt)
     return answer
 
+
 ###>- PLOTS LIKELYHOOD AND IMPACT ON A 23 FLAT DATA LIST
 def plot(xval, yval):
-    ####################
-    # GLOBAL VARIABLES #
-    ####################
+    # =============
+    # VARIABLES
+    # =============
+    "SET GLOBAL"
     global zero
     global one
     global two
@@ -450,7 +455,14 @@ def plot(xval, yval):
     global twenty_three
     global twenty_four
     global a
+    "SET STRINGS"
+    "SET INT'S"
+    "SET MARTIX/LIST"
+    # =============
+    # PROCESS
+    # =============
 
+    """ Plotting the risk of the the system for a 5x5. This can be outputted in CL or to an excel sheet. """
 
     b = 'R'
     if xval == 0:
@@ -515,6 +527,7 @@ def plot(xval, yval):
     print(twenty, twenty_one, twenty_two, twenty_three, twenty_four)
 
 
+###>- CHECKS INPUT VALIDATION FOR ALL ENTRYS THAT INCLUDE INTS -<###        INPUT PROMPT / OUTPUT VALUE
 def check_int(prompt, highest):
     while True:
        try:
@@ -529,6 +542,8 @@ def check_int(prompt, highest):
 
     return value
 
+
+###>- OUTPUTS FINAL INFORMATION TO THE USERS _-<###             INPUT INFOAAR[] / OUTPUT N/A UI
 def output():
 
     # =============
