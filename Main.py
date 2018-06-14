@@ -227,21 +227,21 @@ def basicInfo():
         Service_branch = str('Air Force')
 
 
-    Data_classification = check_int("Please Select Data Classification: "
+    data_classification = check_int("Please Select Data Classification: "
                                     "\n1.U \n2.S \n3.TS \nChoice: ", 3)
-    if Data_classification == 1:
-        Data_classification = str('Unclassified')
-    if Data_classification == 2:
-        Data_classification = str('Secret')
-    if Data_classification == 3:
-        Data_classification = str('Top Secret')
+    if data_classification == 1:
+        data_classification = str('Unclassified')
+    if data_classification == 2:
+        data_classification = str('Secret')
+    if data_classification == 3:
+        data_classification = str('Top Secret')
 
     # arr is used for output and storage.
     arr.append(System_name)
     arr.append(System_status)
     arr.append(Authorizing_official)
     arr.append(Service_branch)
-    arr.append(Data_classification)
+    arr.append(data_classification)
     arr.append(system_description)
     systemlist.append(System_name)
     return arr
@@ -588,16 +588,30 @@ def output():
 
 def menu():
     print("This is a Risk Scoring Tool\n")
-    print("Would you like to enter system information?: ")
-    print("Y/N")
     print(" ")
-    choice = input()
     while True:
+        try:
+            choice = str(input('Would you like to enter system information?: \nY/N: '))
+
+        except ValueError:
+            print("Sorry, That input is not valid")
+            continue
         if choice == ("y" or "Y"):
             main()
-            input("Would you like to Add another system?: ")
+            choice = str(input("Would you like to Add another system?: "))
         elif choice == ("n" or "N"):
             print("Thank you for using the program")
+            break
+    while True:
+        try:
+            secondchoice = str(input('Would you like to view a systems rank?: \n Y/N: '))
+        except ValueError:
+            print("Sorry, that is not valid")
+        if secondchoice == ("y" or "Y"):
+            save()
+            secondchoice = str(input("Would you like to view another system? \nY/N: "))
+        elif secondchoice == ("n" or "N"):
+            print("Thank you for using the program. All data will be lost if not exported.")
             break
     quit()
 
@@ -631,7 +645,7 @@ def save():
     # need if statements for 1
 
     choisetemp *= 8
-    choisetemp -= 8
+    choisetemp -= 9
     finaltemp = choisetemp + 8
     for x in range (choisetemp, finaltemp):
         print(arr[x])
