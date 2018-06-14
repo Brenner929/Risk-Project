@@ -10,7 +10,7 @@
 Creation Date:      6/4/2018
 Original Author:    Christian Brenner, Matt Salvo, BMCS
 Version Author:
-Version:            0.3.2
+Version:            0.4.3
 Version Date:
 """
 
@@ -39,6 +39,7 @@ import xlsxwriter
 # GLOBAL VARIABLES #
 ####################
 runt = 0
+rcount = 1
 likelyhood_final = 0
 impact_score = 0
 xchart = 0
@@ -253,6 +254,7 @@ def impact():
     # VARIABLES
     # =============
     "SET GLOBAL"
+    global arr
     "SET STRINGS"
     "SET INT'S"
     "SET MARTIX/LIST"
@@ -272,7 +274,6 @@ def impact():
     isc -= 1
     if score <= isc:        # Comparing scores and using the higher value for the risk
         score = isc
-
     return score
 
 
@@ -429,6 +430,7 @@ def likelyhood_score():
     # runt += funding // Funding should not effect the likely hood score
 
     answer = likelyhood(runt)
+    runt = 0                    # Clears runt for any future systems that you would like to include
     return answer
 
 
@@ -473,7 +475,7 @@ def plot(xval, yval):
 
     """ Plotting the risk of the the system for a 5x5. This can be outputted in CL or to an excel sheet. """
 
-    b = 'R'
+    b = 'R' + str(rcount)
     if xval == 0:
         if yval == 4:
             zero.append(b)
@@ -596,21 +598,19 @@ def menu():
         except ValueError:
             print("Sorry, That input is not valid")
             continue
-        if choice == ("y" or "Y"):
+        if (choice == "y") or (choice == "Y"):
             main()
-            choice = str(input("Would you like to Add another system?: "))
-        elif choice == ("n" or "N"):
-            print("Thank you for using the program")
+        elif (choice == "n") or (choice == "N"):
+           # print("Thank you for using the program")
             break
     while True:
         try:
             secondchoice = str(input('Would you like to view a systems rank?: \n Y/N: '))
         except ValueError:
             print("Sorry, that is not valid")
-        if secondchoice == ("y" or "Y"):
+        if (secondchoice == "y") or (secondchoice == "Y"):
             save()
-            secondchoice = str(input("Would you like to view another system? \nY/N: "))
-        elif secondchoice == ("n" or "N"):
+        elif (secondchoice == "n") or (secondchoice == "N"):
             print("Thank you for using the program. All data will be lost if not exported.")
             break
     quit()
@@ -625,7 +625,6 @@ def save():
     global systemlist
     "SET STRINGS"                           # being tested at the time.
     "SET INT'S"
-    choisetemp = 0
     numtemp = 1
     "SET MARTIX/LIST"
 
@@ -636,21 +635,25 @@ def save():
     # List Systems
     temp = len(systemlist)
     print("Please select system.: ")
-    for x in range (0, temp):
+    for x in range(0, temp):
         print(numtemp, systemlist[x])
         numtemp += 1
 
     choisetemp = int(input("Select Here: "))
     # check data entry here
     # need if statements for 1
+    answers = ["System Name: ", "System Status: ", "Authorizing Official: ", "Branch: ", "Data Classification: ",
+               "Description: ", "Impact Score: ", "LikelyHood Score: "]
 
     choisetemp *= 8
-    choisetemp -= 9
+    choisetemp -= 8
     finaltemp = choisetemp + 8
-    for x in range (choisetemp, finaltemp):
-        print(arr[x])
-
-
+    test = 0
+    for x in range(choisetemp, finaltemp):
+         print(answers[test])
+         print(arr[x])
+         print(" ")
+         test += 1
 
 def main():
 
@@ -661,18 +664,21 @@ def main():
     global infoarr
     global xchart
     global ychart
-
+    global rcount
     # basicinfo()
     # likelyhood_final = likelyhood_score()
     # scorefunction(likelyhood_final, impact_score)       #return
 
     infoarr = basicInfo()
     likelyhood_final = likelyhood_score()
+    arr.append(impact_score)
+    arr.append(likelyhood_final)
     scorefunction(likelyhood_final, impact_score)
     output()
     plot(xchart, ychart)
     print("Impact ", impact_score)
     print("LikelyHood ", likelyhood_final)
+    rcount += 1
     return 0
 
 
