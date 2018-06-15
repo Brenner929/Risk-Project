@@ -18,12 +18,12 @@ Version Date:
 ####################
 # RETRIVE EXTERNAL #
 ####################
-import os
-os.system('cls')
-print(">Installing/Verifying Libraries")
-os.system('pip install pandas numpy xlsxwriter')
-print(">Installing/Verifying completed")
-os.system('cls')
+# import os
+# os.system('cls')
+# print(">Installing/Verifying Libraries")
+# os.system('pip install pandas numpy xlsxwriter')
+# print(">Installing/Verifying completed")
+# os.system('cls')
 
 
 ######################
@@ -92,11 +92,11 @@ def check_zero(prompt, highest):
     # =============
     while True:
         try:
-            value = int(input(prompt))          # Checking for int input
+            value = int(input(prompt))
         except ValueError:
             print("Sorry, that input is not valid")
             continue
-        if (value > highest) or (value < 0):    # limit answers to choices including 0
+        if (value > highest) or (value < 0):
             print("Please enter a correct answer")
         else:
             break
@@ -118,11 +118,9 @@ def scorefunction(num, num2):
     x = num2
     "SET MARTIX/LIST"
 
-
     # =============
     # PROCESS
     # =============
-
     # Assigning the correct value to the Likelihood score.
     if y <= 10:                       # If 10 or less Very Low is assigned
         ychart = 0
@@ -148,7 +146,7 @@ def scorefunction(num, num2):
         xchart = 4
 
 
-###>- DOES MATH -<###         INPUT: num / OUTPUT: num
+###>- If Answers are 5 point higher than needed this fuction corrects that -<###         INPUT: num / OUTPUT: num
 def maths(num):
     #=============
     # VARIABLES
@@ -162,13 +160,13 @@ def maths(num):
     # PROCESS
     #=============
     "Testing num for a given value"
-    num -= 1                            # Subtract 1 from num
-    if (num == 2):                      # If num is equal to 3
-        num = 0                         # Set num to 0
-    else:
-        print('NOPE')
-    # END IF:ELSE
-    "End Function"
+    num -= 1
+    if (num == 2):
+        num = 0
+    # else:
+    #     print('NOPE')
+    # # END IF:ELSE
+    # "End Function"
     return num
 
 
@@ -205,28 +203,35 @@ def basicInfo():
     # PROCESS
     # =============
 
-    System_name = input('Enter System Name: ')
+    system_name = input('Enter System Name: ')
+    print(" ")
 
     system_description = input(' Enter System Description: ')
+    print(" ")
 
-    System_status = check_int("Please Chose the corresponding number for your system status: \n1.Pre-Milestone \n2.LIRP "
-                              "\n"
-                              "Choice: ", 2)
-    if System_status == 1:
-        System_status = str('Pre-Milestone')
-    if System_status == 2:
-        System_status = str('LIRP')
+    system_status = check_int("Please Chose the corresponding number for your system status: \n1.Pre-Milestone "
+                              "\n2.LIRP \n3.Full Rate Production \n4.Sustainment \nChoice: ", 4)
+    if system_status == 1:
+        system_status = str('Pre-Milestone')
+    if system_status == 2:
+        system_status = str('LIRP')
+    if system_status == 3:
+        system_status = str('Full Rate Production')
+    if system_status == 4:
+        system_status = str('Sustainment')
+    print(" ")
 
-    Authorizing_official = input('Please enter Authorizing Official: ')
+    authorizing_official = input('Please enter Authorizing Official: ')
+    print(" ")
 
-    Service_branch = check_int("Please Select Branch: \n1.Army \n2.Navy \n3.Air Force \nChoice: ", 3)
-    if Service_branch == 1:
-        Service_branch = str('Army')
-    if Service_branch == 2:
-        Service_branch = str('Navy')
-    if Service_branch == 3:
-        Service_branch = str('Air Force')
-
+    service_branch = check_int("Please Select Branch: \n1.Army \n2.Navy \n3.Air Force \nChoice: ", 3)
+    if service_branch == 1:
+        service_branch = str('Army')
+    if service_branch == 2:
+        service_branch = str('Navy')
+    if service_branch == 3:
+        service_branch = str('Air Force')
+    print(" ")
 
     data_classification = check_int("Please Select Data Classification: "
                                     "\n1.U \n2.S \n3.TS \nChoice: ", 3)
@@ -237,14 +242,15 @@ def basicInfo():
     if data_classification == 3:
         data_classification = str('Top Secret')
 
+    print(" ")
     # arr is used for output and storage.
-    arr.append(System_name)
-    arr.append(System_status)
-    arr.append(Authorizing_official)
-    arr.append(Service_branch)
+    arr.append(system_name)
+    arr.append(system_status)
+    arr.append(authorizing_official)
+    arr.append(service_branch)
     arr.append(data_classification)
     arr.append(system_description)
-    systemlist.append(System_name)
+    systemlist.append(system_name)
     return arr
 
 
@@ -307,7 +313,7 @@ def likelyhood_score():
                              "\n9.Standalone System - With Media  "
                              "\n10.Standalone System - No Media"
                              "\nChoice: ", 10)
-
+    print(" ")
     connectivity = 10 - connectivity
     runt += connectivity
 
@@ -318,21 +324,21 @@ def likelyhood_score():
                                "\n4.101-500  "
                                "\n5.501+ "
                                "\nChoice: ", 5)
-
+    print(" ")
     runt += system_fielded
 
     email = check_zero("Are users able to email?: "
                       "\n1.Yes  "
                       "\n0.No "
                       "\nChoice: ", 1)
-
+    print(" ")
     runt += email
 
     web = check_zero("Are users able to use a web browser?: "
                     "\n1.Yes  "
                     "\n0.No "
                     "\nChoice: ", 1)
-
+    print(" ")
     runt += web
 
     admin_privileges = check_int("What kind of users are logged on as?: "
@@ -341,7 +347,7 @@ def likelyhood_score():
                                  "\n3.Admin - Elevated privileges "
                                  "\n4.Does not Apply"
                                  "\nChoice: ", 4)
-
+    print(" ")
     admin_privileges -= 1
     if admin_privileges == 3:
         admin_privileges = 0
@@ -354,7 +360,7 @@ def likelyhood_score():
                     "\n3.Does not Apply"
                     "\nChoice: ", 3)
     # corrects for the number 3 choice due to maths function.
-
+    print(" ")
     tfa = maths(tfa)
     runt += tfa
 
@@ -362,40 +368,41 @@ def likelyhood_score():
                               "\n1.Yes "
                               "\n2.No "
                               "\n3.Does not Apply"
-                              "\nChoices: ", 3)
-
+                              "\nChoice: ", 3)
+    print(" ")
     app_whitelist = maths(app_whitelist)
     runt += app_whitelist
 
     host_protection = check_int("Uses Host Based Protection?: "
                                 "\n1.Yes "
                                 "\n2.No"
-                                "\nChoices: ", 2)
+                                "\nChoice: ", 2)
 
-
+    print(" ")
     host_protection = maths(host_protection)
     runt += host_protection
 
     hard_ports = check_int("Are the unused ports (Ethernet/USB) disabled on the system?: "
                            "\n1.Yes  "
                            "\n2.No"
-                           "\nChoices: ", 2)
+                           "\nChoice: ", 2)
+    print(" ")
     hard_ports = maths(hard_ports)
     runt += hard_ports
 
     stigs = check_int("Have any STIGs been run on the system?: "
                       "\n1.Yes  "
                       "\n2.No  "
-                      "\nChoices: ", 2)
-
+                      "\nChoice: ", 2)
+    print(" ")
     stigs = maths(stigs)
     runt += stigs
 
     encryption = check_int("Is encryption at rest?: "
                            "\n1.Yes  "
                            "\n2.No  "
-                           "\nChoices: ", 2)
-
+                           "\nChoice: ", 2)
+    print(" ")
     encryption = maths(encryption)
     runt += encryption
 
@@ -412,8 +419,8 @@ def likelyhood_score():
 
     testing = check_int("Has any Testing been complected?: "
                         "\n1.Yes - Vulnerability  \n2.Yes - Penetration  \n3. Yes - Adversary  \n4.No: "
-                        "\nChoices: ", 4)
-
+                        "\nChoice: ", 4)
+    print(" ")
     # Make a negative number out of the Choice selected
     if testing == 4:
         testing = 0
@@ -423,7 +430,7 @@ def likelyhood_score():
 
 
     # funding = int(input('Is Funding Available: '
-    #                     '\n1.Yes  \n2.No  \n0.Does Not Apply \nChoices : '))
+    #                     '\n1.Yes  \n2.No  \n0.Does Not Apply \nChoice : '))
     # funding -= 1
     # if (funding == 1) or (funding == 0):
     #     when_funding = input('When will funding be available?: (Please enter in MM/DD/YYYY format)')
@@ -574,7 +581,7 @@ def output():
     # PROCESS
     # =============
 
-    #arr = [System_name, System_status, Authorizing_official, Service_branch, Rationale_for_waiver, Data_classification]
+    #arr = [system_name, system_status, authorizing_official, service_branch, Rationale_for_waiver, Data_classification]
     print('')
     print('Here are your results!')
     print('System Name: ' + infoarr[0])
@@ -587,7 +594,7 @@ def output():
     print('Your system risk score is as follows.\n')
     #print('Y-Value: ' + ychart)
 
-
+###>-
 def menu():
     print("This is a Risk Scoring Tool\n")
     print(" ")
@@ -605,7 +612,7 @@ def menu():
             break
     while True:
         try:
-            secondchoice = str(input('Would you like to view a systems rank?: \n Y/N: '))
+            secondchoice = str(input('Would you like to view a systems information you entered?: \n Y/N: '))
         except ValueError:
             print("Sorry, that is not valid")
         if (secondchoice == "y") or (secondchoice == "Y"):
@@ -660,7 +667,6 @@ def main():
     global impact_score
     global likelyhood_final
     global runt
-    global bingo
     global infoarr
     global xchart
     global ychart
