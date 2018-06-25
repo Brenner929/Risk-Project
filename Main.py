@@ -29,10 +29,10 @@ Version Date:
 ######################
 # EXTERNAL LIBRARIES #
 ######################
-import re
-import pandas as pd
-import numpy as np
-import xlsxwriter
+# import re
+# import pandas as pd
+# import numpy as np
+# import xlsxwriter
 
 
 ####################
@@ -585,7 +585,7 @@ def output():
     print('')
     print('Here are your results!')
     print('System Name: ' + infoarr[0])
-    print('System Description' + infoarr[5])
+    print('System Description: ' + infoarr[5])
     print('System Status: ' + infoarr[1])
     print('Authorizing Official: ' + infoarr[2])
     print('Service Branch: ' + infoarr[3])
@@ -594,7 +594,7 @@ def output():
     print('Your system risk score is as follows.\n')
     #print('Y-Value: ' + ychart)
 
-###>-
+###>- MENU for Text UI. Main is run within MANU -<###           INPUT NA / OUTPUT N/A
 def menu():
     print("This is a Risk Scoring Tool\n")
     print(" ")
@@ -656,6 +656,7 @@ def save():
     choisetemp -= 8
     finaltemp = choisetemp + 8
     test = 0
+    print(" ")
     for x in range(choisetemp, finaltemp):
          print(answers[test])
          print(arr[x])
