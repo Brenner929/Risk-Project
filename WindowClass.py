@@ -20,7 +20,9 @@ root.withdraw()
 # Responses: These are the responses to the question. Stored as a location in memory
 v = IntVar()
 
+
 current_window = None
+
 
 with open('test.csv') as csvfile:
     readCSV = csv.reader(csvfile, skipinitialspace=True, delimiter=',')
@@ -55,27 +57,12 @@ def weight_list(list): #void
 weight_list(arr)
 
 
-# def score_math(wlist, rlist):
-#     wt = 0
-#     rt = 0
-#     length = len(wlist)
-#     for x in range(0, length):
-#         wt += int(wlist[x])
-#
-#     print(wt)
-#
-#     for x in range(0, length):
-#         rt += int(wlist[x]) * int(rlist[x])
-#         final = rt / wt
-#
-#     print(final, "/", 10)
 
-
-# score_math(weight, responces)
 
 
 def hello():
     print("hello!")
+
 
 menubar = Menu(root)
 menubar.add_command(label="Hello", command=hello)
@@ -118,9 +105,10 @@ def new_window():
         #count = Label(window, text=counter)
         #count.grid(row=1, column=1, pady=25)
         global n
-        question = Label(window, text=arr[n][0], font=32)
-        question.grid(row=0, column=0, sticky=W, pady=25)
-        n += 1
+        if (n <= len(weight)):
+            question = Label(window, text=arr[n][0], font=32)
+            question.grid(row=0, column=0, sticky=W, pady=25)
+            n += 1
 
     label_creation()
 
@@ -129,11 +117,12 @@ def new_window():
         vcount = 0
         rcount = 1
         #choice = ["One", "Two", "Three"]
-        for x in range(1, num_of_choices(arr[j])):
-            Radiobutton(window, text=arr[j][x], font=16, variable=v, value=vcount).grid(row=rcount, column=0, sticky=W)
-            vcount += 1
-            rcount += 1
-        j += 1
+        if (n <= len(weight)):
+            for x in range(1, num_of_choices(arr[j])):
+                Radiobutton(window, text=arr[j][x], font=16, variable=v, value=vcount).grid(row=rcount, column=0, sticky=W)
+                vcount += 1
+                rcount += 1
+            j += 1
 
 
     radio_creation()
@@ -148,10 +137,26 @@ def new_window():
     global v
     temp = v.get()
     userresponce(temp)
-    print(responses)
+
+def score_math(wlist, rlist):
+    wt = 0
+    rt = 0
+    length = len(wlist)
+    for x in range(0, length):
+        wt += int(wlist[x])
+
+    # print(wt)
+
+    for x in range(0, length):
+        rt += int(wlist[x]) * int(rlist[x])
+        final = rt / wt
+
+    print(final, "/", 10)
 
 
-window = new_window()
+# score_math(weight, responses)
+if (n < len(weight)):
+    window = new_window()
+    root.mainloop()
 
-
-root.mainloop()
+score_math(weight, responses)
