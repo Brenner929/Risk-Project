@@ -73,11 +73,6 @@ def score_math(wlist, rlist):
         final = rt / wt
 
     return final
-final = score_math(weight, responces)
-
-
-row = 0
-col = 0
 text_responce = []
 
 def t_responce(rlist):
@@ -85,27 +80,60 @@ def t_responce(rlist):
     for x in range(0, len(rlist)):
         if rlist[x] == 10:
             text_responce.append("Yes")
-            print("yeeeet")
         if rlist[x] == 0:
             text_responce.append("No")
-            print("nope")
-
 
 t_responce(responces)
 
+row = 0
+col = 0
 
 def output():
     global row
     global col
     workbook = xlsxwriter.Workbook('Results.xlsx')
     worksheet = workbook.add_worksheet()
+
+    text = 'This is a Risk Scoring tool. Below you will find your basic information and score.'
+
+    options = {
+        'width': 256,
+        'height': 100,
+        'x_offset': 10,
+        'y_offset': 10,
+
+        'font': {'color': 'black',
+                 'size': 14},
+        'align': {'vertical': 'middle',
+                 'horizontal': 'left'},
+        'gradient': {'colors':['#DDEBCF', '#9CB86E', '#156B13']}
+    }
+
+    worksheet.insert_textbox('G2', text, options)
+    #formating
+    row += 2
+    bold = workbook.add_format({'bold': 1})
+    worksheet.write(row, col, "Questions", bold)
+    worksheet.write(row, col + 1, "Answers", bold)
+    worksheet.write(row, col + 2, "Weight Assigned", bold)
+    worksheet.set_column('A:A', 15)
+    row += 2
+
+    worksheet.write(row, col, "Risk Score for the system", bold)
+    worksheet.write_blank(row, col + 1, None)
+    worksheet.write(row, col + 2, score)
+    worksheet.write(row, col + 3, "/")
+    worksheet.write(row, col + 4, "10")
+
+
+
+    row += 5
     for x in range(0, len(weight)):
         worksheet.write(row, col    , arr[x][0])
         worksheet.write(row, col + 1, text_responce[x])
-        worksheet.write(row, col + 2, weight[x])
+        worksheet.write(row, col + 2, int(weight[x]))
         row += 1
-    worksheet.write(row + 11, col + 2, final)
-    worksheet.write(row + 11, col + 3, "/")
-    worksheet.write(row + 11, col + 4, "10")
+
+
 
 output()
