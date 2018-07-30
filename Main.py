@@ -18,12 +18,12 @@ Version Date:
 ####################
 # RETRIVE EXTERNAL #
 ####################
-# import os
-# os.system('cls')
-# print(">Installing/Verifying Libraries")
-# os.system('pip install pandas numpy xlsxwriter')
-# print(">Installing/Verifying completed")
-# os.system('cls')
+import os
+os.system('cls')
+print(">Installing/Verifying Libraries")
+os.system('pip install pandas numpy xlsxwriter xlrd')
+print(">Installing/Verifying completed")
+os.system('cls')
 
 
 ######################
