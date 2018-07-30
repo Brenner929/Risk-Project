@@ -33,7 +33,7 @@ menu_bar = Menu(root)
 menu_bar.add_command(label="Hello", command=hello)
 menu_bar.add_command(label="Quit", command=root.quit)
 root.config(menu=menu_bar)
-root.geometry("600x300+0+0")
+root.geometry("600x400+0+0")
 root.title("RAST")
 background_image = PhotoImage(file='Logo1.gif')
 background_label = Label(root, image=background_image)
@@ -79,11 +79,11 @@ def num_of_choices(list):
 
 def basic_info():
 
-    name = "System Name"
-    description = "Description"
-    data_class = "Data Classification"
-    date = "Date of score"
-    assessor = "Assessor"
+    name = "EMNS"
+    description = "System to alert people"
+    data_class = "Secret"
+    date = "7/31/2018"
+    assessor = "John Doe"
     worksheet.write('F8', "System Name:")
     worksheet.write('F9', "Description:")
     worksheet.write('F10', "Data Classification:")
@@ -161,7 +161,7 @@ def label_creation():
     n=0
     global question
     if n < len(weight):
-        question = Label(root, text=arr[n][1], font=32)
+        question = Label(root, text=arr[n][1], font=32, wraplength=400)
         question.grid(row=0, column=0, sticky=W, pady=25)
         n += 1
 
@@ -240,10 +240,10 @@ def previous():
 
 
 btnNext = Button(root, text="Next", command=next, height=1, width=10)
-btnNext.grid(row=9, column=1, padx=25, pady=40)
+btnNext.grid(row=9, column=1, padx=10, pady=40)
 
 btnPrevious = Button(root, text="Previous", command=previous, height=1, width=10)
-btnPrevious.grid(row=9, column=0, padx=25, pady=40)
+btnPrevious.grid(row=9, column=0, padx=10, pady=40)
 
 
 # window = new_window()
@@ -323,8 +323,9 @@ def output():
     worksheet.write('G15', "Adjusted Score for the system", bold)
     worksheet.write_blank('H14', None)
     worksheet.write_blank('H15', None)
-    worksheet.write('J14', adj_score)
-    worksheet.write('J15', score)
+    worksheet.write('J15', adj_score)
+    print(adj_score)
+    worksheet.write('J14', score)
     worksheet.write('K14', "/")
     worksheet.write('K15', "/")
     worksheet.write('L14', int("10"))
@@ -370,9 +371,11 @@ def chart():
 
     # add a series to the chart
     steve.add_series({'values': '=Sheet1!$j$14:$j$14', 'fill': {'color': 'green'},
-                      'border': {'color': 'black'}})
+                      'border': {'color': 'black'},
+                      'name': 'Baseline'})
     steve.add_series({'values': '=Sheet1!$j$15:$j$15', 'fill': {'color': 'red'},
-                      'border': {'color': 'black'}})
+                      'border': {'color': 'black'},
+                      'name': 'Adj User'})
 
     # insert the chart into the worksheet
     worksheet.insert_chart('G20', steve)
