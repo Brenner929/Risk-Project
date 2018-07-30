@@ -1,0 +1,27 @@
+AC-3,Is access to the system limited to authorized users only?,LOW,Access Control,1,Yes,No
+AC-5,Is there a separation of duties among those working on the system?,MODERATE,Access Control,4,Yes,No
+AC-7,Are unsuccessful logon attempts limited to three?,LOW,Access Control,1,Yes,No
+AT-1,"Are managers, systems administrators and users educated about security risks associated with their activities and applicable policies, standards and procedures?",LOW,Awareness And Training,1,Yes,No
+AT-2,Is  security awareness training on   recognizing and reporting potential indicators of insider threat conducted regularly?,LOW,Awareness And Training,1,Yes,No
+AU-1,Are automated mechanisms used to integrate and correlate auditing and reporting processes?,LOW,Audit And Accountability,1,Yes,No
+AU-6,Does the system support on-demand analysis and reporting?,LOW,Audit And Accountability,1,Yes,No
+CM-9,Is user-installed software controlled and monitored?,MODERATE,Configuration Management,4,Yes,No
+CM-11,Are the types of programs users can install limited?,LOW,Configuration Management,1,Yes,No
+IA-1,Is the reuse of identifiers prevented for at least one year?,LOW,Identification And Authentication,1,Yes,No
+IA-4,Are identifiers disabled after 35 days of inactivity?,LOW,Identification And Authentication,1,Yes,No
+IA-5,"Are passwords required to  be at least case sensitive 8-character mix of upper case letters, lower case letters, numbers, and special characters, including at least one of each?",LOW,Identification And Authentication,1,Yes,No
+IR-1,Has an incident response plan been put in place?,LOW,Incident Response,1,Yes,No
+IR-3,Is the incident response plan tested every six months?,MODERATE,Incident Response,4,Yes,No
+MA-3,Are records of maintenance activity recorded?,MODERATE,Maintenance,4,Yes,No
+MA-4,Is MFA established for nonlocal maintenance sessions?,LOW,Maintenance,1,Yes,No
+MP-1,Is the media protection policy updated every year?,LOW,Media Protection,1,Yes,No
+MP-4,Are automated mechanisms in place to restrict access to media storage areas?,MODERATE,Media Protection,4,Yes,No
+PE-1,Are physical and environmental protection procedures in place and reviewed annually?,LOW,Physical And Environmental Protection,1,Yes,No
+PE-3,Are physical access logs maintained and checked daily?,LOW,Physical And Environmental Protection,1,Yes,No
+RA-5,Are information systems and applications scanned for vulnerabilities every 30 days?,LOW,Risk Assessment,1,Yes,No
+CA-1,"Is there a security assessment policy in place that addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance?",LOW,Security Assessment And Authorization,1,Yes,No
+CA-8,Is penetration testing conducted within the organizationally-defined frequency?,HIGH,Security Assessment And Authorization,10,Yes,No
+SC-2,Is user functionality separated from system management functionality?,MODERATE,System And Communications Protection,4,Yes,No
+SC-8,Are cryptographic mechanisms in place to prevent the unauthorized disclosure of CUI during transmission?,MODERATE,System And Communications Protection,4,Yes,No
+SI-1,"Is an information integrity policy that addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance in place?",LOW,System And Information Integrity,1,Yes,No
+SI-6,Does the information system verify the correct operation is being performed and provide verification of this?,HIGH,System And Information Integrity,10,Yes,No

@@ -161,7 +161,7 @@ def label_creation():
     n=0
     global question
     if n < len(weight):
-        question = Label(root, text=arr[n][0], font=32)
+        question = Label(root, text=arr[n][1], font=32)
         question.grid(row=0, column=0, sticky=W, pady=25)
         n += 1
 
@@ -220,7 +220,7 @@ def next():
         btnQuit.grid(row=2, column=0, pady=40)
 
 
-    question.config(text=arr[n][0])
+    question.config(text=arr[n][1])
     question.grid(row=0, column=0, sticky=W, pady=25)
 
     print(n)
