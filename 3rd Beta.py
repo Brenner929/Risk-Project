@@ -324,7 +324,6 @@ def output():
     worksheet.write_blank('H14', None)
     worksheet.write_blank('H15', None)
     worksheet.write('J15', adj_score)
-    print(adj_score)
     worksheet.write('J14', score)
     worksheet.write('K14', "/")
     worksheet.write('K15', "/")
