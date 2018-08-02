@@ -260,9 +260,9 @@ text_response = []
 def t_response(rlist):
     global text_response
     for x in range(0, len(rlist)):
-        if rlist[x] == 10:
-            text_response.append("Yes")
         if rlist[x] == 0:
+            text_response.append("Yes")
+        if rlist[x] == 10:
             text_response.append("No")
 
 

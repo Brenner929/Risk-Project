@@ -1,4 +1,3 @@
-Title,Question,Raw Risk,Family,Weight,Response1,Response2
 AC-3,Is access to the system limited to authorized users only?,LOW,Access Control,3,Yes,No
 AC-5,Is there a separation of duties among those working on the system?,MODERATE,Access Control,6,Yes,No
 AC-7,Are unsuccessful logon attempts limited to three?,LOW,Access Control,2,Yes,No

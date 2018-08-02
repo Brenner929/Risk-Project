@@ -1,7 +1,45 @@
+
+
+"""
+Creation Date: 6/4/2018
+Original Author: Christian Brenner, Matt Salvo, BMCS
+Version Author:
+Version:        0.3.1
+Version Date:   7/31/2018
+"""
+
+"""
+Description: This program is to take input from the user after asking questions and transform this data into a risk 
+score. This risk score is scored against a baseline risk score that is pre set by admin. Both, Questions and Answers, 
+are apart of a csv, in which the data in imputed. Making the program module with different systems or risk assessments. 
+"""
+
+
+
+####################
+# RETRIVE EXTERNAL #
+####################
+
+import os
+os.system('cls')
+print(">Installing/Verifying Libraries")
+os.system('pip install xlsxwriter csv')
+print(">Installing/Verifying completed")
+os.system('cls')
+
+
+######################
+# EXTERNAL LIBRARIES #
+######################
 from tkinter import *
 from tkinter import messagebox
 import csv
 import xlsxwriter
+
+
+####################
+# GLOBAL VARIABLES #
+####################
 
 weight = []
 num_questions = 0
@@ -19,12 +57,28 @@ window_counter = 0
 family = []
 combolist = []
 adj_weight = []
-
-
 root = Tk()
 v = IntVar()
 
 
+##################
+# CSV FILE INPUT #
+##################
+
+# for the baseline score
+with open('nist_baseline.csv') as csvfile:
+    readCSV = csv.reader(csvfile, skipinitialspace=True, delimiter=',')
+    arr = list(readCSV)
+
+# for the user adjusted scores
+with open('adjusted.csv') as wumbo:
+    secondCSV = csv.reader(wumbo, skipinitialspace=True, delimiter=',')
+    adjusted_import = list(secondCSV)
+
+
+
+
+# Place holder for file drop down menu in the task bar
 def hello():
     print("hello!")
 
@@ -38,26 +92,11 @@ root.title("RAST")
 background_image = PhotoImage(file='Logo1.gif')
 background_label = Label(root, image=background_image)
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
-#root.withdraw()
-
-# Responses: These are the responses to the question. Stored as a location in memory
-
-# current_window = None
-
-with open('nist_baseline.csv') as csvfile:
-    readCSV = csv.reader(csvfile, skipinitialspace=True, delimiter=',')
-    arr = list(readCSV)
 
 
-with open('adjusted.csv') as wumbo:
-    secondCSV = csv.reader(wumbo, skipinitialspace=True, delimiter=',')
-    adjusted_import = list(secondCSV)
-
- ###- Responce Test -###
-# with open('Responces.csv') as csvtest:
-#     rcsv = csv.reader(csvtest, skipinitialspace=True, delimiter=',')
-#     responces = list(rcsv)
-
+########################
+# Excel Sheet Creation #
+########################
 
 workbook = xlsxwriter.Workbook('Results.xlsx')
 worksheet = workbook.add_worksheet()
@@ -65,20 +104,20 @@ worksheet1 = workbook.add_worksheet('Chart')
 bold = workbook.add_format({'bold': 1})
 print(arr)
 
-# v gets inserted into num. This will add to the response list
-def user_response(num):# Same as User just with _
+#############
+# FUNCTIONS #
+#############
+
+# Responses from the GUI is saved and run in this function. This is a function that appends to the responses list.
+def user_response(num):
     global responses
     responses.append(num)
 
-
-# insert
-def num_of_choices(list):
-    length = len(list)
-    length -= 2
-    return length
-
-
+# Function contains Basic_Information about the the system getting a risk score. This includes
+# data that is transferred to the excel sheet with this information.
 def basic_info():
+
+    #Basic info varables with there locations are here
 
     name = "EMNS"
     description = "System to alert people"
@@ -94,17 +133,12 @@ def basic_info():
     options = {
         'width': 256,
         'height': 100,
-        # 'x_offset': 10,
-        # 'y_offset': 10,
-
         'font': {'color': 'black',
                  'size': 14},
-        # 'align': {'vertical': 'middle',
-        #          'horizontal': 'left'},
         'colors': {'#DDEBCF'}
     }
 
-    # ('A:A', 15)
+    # Formatting settings for basic info including column width sizes.
     worksheet.write('G8', name, bold)
     worksheet.write('G9', description, bold)
     worksheet.write('G10', data_class, bold)
@@ -119,7 +153,7 @@ def basic_info():
 
 num_questions = len(arr)
 
-
+# For loop function transferring the baseline list of weights from the CSV to a Weight only list
 def weight_list(list): #void
     global weight
 
@@ -128,7 +162,7 @@ def weight_list(list): #void
         n = list[x][4]
         weight.append(n)
 
-
+# For loop function transferring the Adjusted user list of weights from the CSV to a Weight only list
 def adj_weight_list(list): #void
     global adj_weight
 
@@ -142,7 +176,8 @@ def adj_weight_list(list): #void
 weight_list(arr)
 adj_weight_list(adjusted_import)
 
-
+# The equation for calculating the risk score. Wlist is the input for Weight and Rlist is for the responses.
+# Wlist should be the only list to change for both of the scores
 def score_math(wlist, rlist):
     wt = 0
     rt = 0
@@ -174,15 +209,7 @@ n = 0
 
 
 def radio_creation():
-    # global j
-    # vcount = 0
-    # rcount = 1
-    # if n <= len(weight):
-    #     for x in range(1, num_of_choices(arr[j])):
-    #         Radiobutton(root, text=arr[j][x], font=16, variable=v, value=vcount).grid(row=rcount, column=0, sticky=W)
-    #         vcount += 10
-    #         rcount += 1
-    #     j -= 1
+
     Radiobutton(root, text="Yes", font=16, variable=v, value=0).place(relx=.1, rely=.5, anchor="w")
     Radiobutton(root, text="No", font=16, variable=v, value=10).place(relx=.1, rely=.6, anchor="w")
 
@@ -263,7 +290,7 @@ root.mainloop()
 
 text_response = []
 
-
+# makes a list that changes the numeral answers provided in responses to a text based answer for the excel workbook
 def t_response(rlist):
     global text_response
     for x in range(0, len(rlist)):
@@ -284,12 +311,9 @@ print(responses)
 score = round(score_math(weight, responses), 2) # Calulates base line score
 
 
-
 adj_score = round(score_math(adj_weight, responses), 2)   # calulates user adjusted score
 
-
-
-
+# Function is the main source for outputting the data gathered to the excel sheet. Also includes formatting.
 def output():
     global row
     global col
@@ -301,40 +325,33 @@ def output():
     print("check me Output")
     text = 'This is a Risk Scoring tool. Below you will find your basic information and score.'
 
+    # option created for the text box for absences and formatting
     options = {
         'width': 256,
         'height': 100,
-        # 'x_offset': 10,
-        # 'y_offset': 10,
 
         'font': {'color': 'black',
                  'size': 14},
-        # 'align': {'vertical': 'middle',
-        #          'horizontal': 'left'},
+
         'colors': {'#DDEBCF'},
         'line': {'color': '#ff9900', 'width': 1.5, 'dash_type': 'square_dot'}
     }
 
+    # Placing the Basic_info before the data gathered for simplicity.
     basic_info()
 
     worksheet.insert_textbox('G2', text, options)
-    #formating
-    # row += 4
-
     worksheet.write(row, col, "Controls", bold)
     worksheet.write(row, col + 1, "Answers", bold)
     worksheet.write(row, col + 2, "Baseline Weight", bold)
     worksheet.set_column('A:A', 15)
     worksheet.set_column('C:C', 15)
     row += 2
-
     worksheet.write('G14', "Baseline Score for the system", bold)
     worksheet.write('G15', "Adjusted Score for the system", bold)
     worksheet.write_blank('H14', None)
     worksheet.write_blank('H15', None)
     worksheet.write('J15', adj_score)
-    print(adj_score)
-    print(adj_weight)
     worksheet.write('J14', score)
     worksheet.write('K14', "/")
     worksheet.write('K15', "/")
@@ -342,10 +359,10 @@ def output():
     worksheet.write('L15', int("10"))
 
     row += 5
+    # for loop placing the Weights, answers, and controls into the excel sheet
     for x in range(0, len(weight)):
 
         rome = text_response[x]
-        # rome = int(rome)
         worksheet.write(row, col    , arr[x][0])
         worksheet.write(row, col + 1, rome)
         worksheet.write(row, col + 2, int(weight[x]))
@@ -363,7 +380,7 @@ def combo(flist, rlist):
     for x in range(len(rlist)):
         combolist = list[x].append(flist[x])
 
-
+# settings for the chart, including the data cells of the series, also appearance.
 def chart():
     global workbook
     global worksheet1
@@ -389,7 +406,7 @@ def chart():
     worksheet.insert_chart('G20', steve)
     workbook.close()
 
-print('Check me')
+# main
 
 output()
 chart()
