@@ -14,6 +14,9 @@ score. This risk score is scored against a baseline risk score that is pre set b
 are apart of a csv, in which the data in imputed. Making the program module with different systems or risk assessments. 
 """
 
+"""
+Wiki for XlsxWriter: https://xlsxwriter.readthedocs.io/
+"""
 
 
 ####################
@@ -330,7 +333,7 @@ def output():
         'width': 256,
         'height': 100,
 
-        'font': {'color': 'black',
+        'font': {'color ': 'black',
                  'size': 14},
 
         'colors': {'#DDEBCF'},
